@@ -37,7 +37,7 @@ module SuperForm
     def save_with_transaction(params={}, &block)
       begin
         save_with_transaction!(params, &block)
-      rescue ReformAtomicSaveError => e
+      rescue ReformAtomicSaveError
         false
       end
     end

@@ -1,13 +1,12 @@
 require 'super_form/concerns/atomic_save'
-
 require 'disposable'
 require 'reform'
 require 'reform/form'
 require 'reform/form/active_record'
 require 'reform/form/active_model'
 require 'reform/form/active_model/form_builder_methods'
-require "reform/form/coercion"
 require "reform/form/active_model/validations"
+require "reform/form/coercion"
 require 'disposable/twin/parent'
 
 Reform::Form.class_eval do

@@ -1,3 +1,4 @@
+require 'iconv'
 module SuperSpreadsheet
   class Loader < SuperProcess::Core
     attr_accessor :file_path
@@ -51,10 +52,10 @@ module SuperSpreadsheet
     def csv_content!
       @decode_csv_content ||= begin
         csv_content_big5!
-      rescue Iconv::IllegalSequence => e
+      rescue Iconv::IllegalSequence
         begin
           csv_content_big5_hkscs!
-        rescue Iconv::IllegalSequence => e
+        rescue Iconv::IllegalSequence
           csv_content
         end
       end

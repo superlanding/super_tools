@@ -53,7 +53,7 @@ module SuperProcess
         begin
           @result = call!(params)
           true
-        rescue ValidError => e
+        rescue ValidError
           false
         end
       end
