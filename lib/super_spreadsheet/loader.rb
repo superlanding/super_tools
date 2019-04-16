@@ -1,4 +1,6 @@
 require 'iconv'
+require 'csv'
+require 'roo'
 module SuperSpreadsheet
   class Loader < SuperProcess::Core
     attr_accessor :file_path
@@ -17,7 +19,7 @@ module SuperSpreadsheet
     end
 
     def extension
-      File.extname(file_path).split('.').last.force_encoding('utf-8').downcase
+      ::File.extname(file_path).split('.').last.force_encoding('utf-8').downcase
     end
 
     def valid_format
@@ -37,11 +39,11 @@ module SuperSpreadsheet
     def rows!
       case extension
       when 'xls'
-        Roo::Excel.new(file_path).map { |row| convert_float_to_integer(row) }
+        ::Roo::Excel.new(file_path).map { |row| convert_float_to_integer(row) }
       when 'xlsx'
-        Roo::Excelx.new(file_path).map { |row| convert_float_to_integer(row) }
+        ::Roo::Excelx.new(file_path).map { |row| convert_float_to_integer(row) }
       when 'csv'
-        CSV.parse(csv_content!)
+        ::CSV.parse(csv_content!)
       else
         false
       end

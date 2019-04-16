@@ -13,6 +13,7 @@ PATH
       iconv
       reform (~> 2.2.4)
       reform-rails
+      roo
       spreadsheet
       virtus (~> 1.0.5)
 
@@ -131,7 +132,11 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     ruby-ole (1.2.12.2)
+    rubyzip (1.2.2)
     shoulda-context (1.2.2)
     spreadsheet (1.2.3)
       ruby-ole (>= 1.0)
