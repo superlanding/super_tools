@@ -32,9 +32,6 @@ module SuperTable
     def self.included(base)
       base.include ::ActionView::Context
       base.include ::ActionView::Helpers
-      if Rails.respond_to?(:application)
-        base.include ::Rails.application.routes.url_helpers
-      end
     end
   end
 end
