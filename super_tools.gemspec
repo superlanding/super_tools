@@ -28,11 +28,15 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "shoulda-context"
 
-  spec.add_dependency "actionview"
-  spec.add_dependency 'activerecord'
-  spec.add_dependency "activemodel"
-  spec.add_dependency "activeview"
-  
+
+  spec.add_dependency "rails", ">= 4", "<= 5"
+  # spec.add_dependency "i18n", "< 1"
+  # spec.add_dependency "actionview", '>= 4', '<= 6'
+  # spec.add_dependency 'activerecord', '>= 4', '<= 6'
+  # spec.add_dependency "activemodel", '>= 4', '<= 6'
+  # spec.add_dependency "activesupport", '>= 4', '<= 6'
+  # spec.add_dependency "activeview"
+  spec.add_dependency "nokogiri", ">= 1.6", "<= 1.9.1"
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"
   spec.add_dependency "roo-xls"
