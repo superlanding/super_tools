@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    super_tools (0.0.4)
+    super_tools (0.0.5)
       dry-logic (~> 0.4.2)
       dry-types (~> 0.13.2)
       fast_excel
@@ -16,7 +16,7 @@ PATH
       searchkick
       spreadsheet
       virtus (~> 1.0.5)
-      warehouse_items (~> 0.2.0)
+      warehouse_items (~> 0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -207,7 +207,7 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
-    warehouse_items (0.2.0)
+    warehouse_items (0.3.0)
       activesupport
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)

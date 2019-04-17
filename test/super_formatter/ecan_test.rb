@@ -15,8 +15,8 @@ describe "SuperFormatter::EcanTest" do
       @row = @service.result[0]
     end
 
-    should "#global_order_id = C2272" do
-      assert_equal 'C2272', @row.global_order_id
+    should "#global_order_id = 2272" do
+      assert_equal '2272', @row.global_order_id
     end
 
     should "#recipient = 連瓊慧" do
@@ -33,8 +33,8 @@ describe "SuperFormatter::EcanTest" do
       @row = @service.result[1]
     end
 
-    should "#global_order_id = C2308" do
-      assert_equal 'C2308', @row.global_order_id
+    should "#global_order_id = 2308" do
+      assert_equal '2308', @row.global_order_id
     end
 
     should "#recipient = 劉珈伶" do
