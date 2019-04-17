@@ -37,6 +37,8 @@ require 'super_formatter/shopline/head'
 require 'super_formatter/shopline/row'
 require 'super_formatter/shopline/order'
 require 'super_formatter/shopline/import'
+# SEARCH
+require 'super_search/scroll'
 # ZIP CODE
 require 'super_zipcode/taiwan'
 # INTERACTION

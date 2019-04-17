@@ -5,8 +5,6 @@ module SuperTable
     include ViewHelpers
     extend Forwardable
 
-    delegate_missing_to :model
-
     class << self
 
       def property(attr_name)
@@ -18,6 +16,16 @@ module SuperTable
       @helpers ||= Class.new do
         include ViewHelpers
       end.new
+    end
+
+    private
+
+    def respond_to_missing?(name, include_private = false)
+      model.respond_to?(name, include_private)
+    end
+
+    def method_missing(method, *args, &block)
+      model.send(method, *args, &block)
     end
   end
 end

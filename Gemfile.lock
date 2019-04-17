@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    super_tools (0.0.3)
+    super_tools (0.0.4)
       dry-logic (~> 0.4.2)
       dry-types (~> 0.13.2)
       fast_excel
