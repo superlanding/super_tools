@@ -37,5 +37,13 @@ require 'super_formatter/shopline/head'
 require 'super_formatter/shopline/row'
 require 'super_formatter/shopline/order'
 require 'super_formatter/shopline/import'
+# ZIP CODE
+require 'super_zipcode/taiwan'
+# INTERACTION
+require 'super_interaction/command'
+require 'super_interaction/controller_helper'
+# FORMATTER
+require 'super_logger/formatter'
+
 module SuperTools
 end
