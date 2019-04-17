@@ -1,39 +1,134 @@
-# SuperTools
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/super_tools`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
+# SuperForm::Reform
 
 ```ruby
-gem 'super_tools'
+class MerchantForm::Edit < SuperForm::Reform
+  model :merchant
+
+  property :title, default: ''
+  property :contact, default: ''
+end
+
 ```
 
-And then execute:
+# SuperLogger::Formatter
 
-    $ bundle
+就是之前的 `LoggerFormatter`
 
-Or install it yourself as:
+# SuperProcess::Core
 
-    $ gem install super_tools
+```ruby
+class BillingCalculate < SuperProcess::Core
+  init :billing do
+    attribute :total_orders_amount, Integer
+  end
 
-## Usage
+  callable do
+    "RESULT_OBJECT"
+  end
 
-TODO: Write usage instructions here
+  def valid_amount
+    if total_orders_amount > 1000
+      errors.add(:total_orders_amount, "金額必須小於 1000 元")
+    end
+  end
+end
 
-## Development
+@service = BillingCalculate.new(@billing)
+@service.call(total_orders_amount: "100")
+#=> true
+@service.total_orders_amount 
+#=> 100
+@service.result 
+#=> "RESULT_OBJECT"
+@service.error_messages
+#=> ""
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# SuperZipcode::Taiwan
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+SuperZipcode::Taiwan.find_zip_code("高雄市鳳山區鳳甲一街129號")
+#=> 830
+```
 
-## Contributing
+# SuperTable
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/super_tools.
+如需要 Rails URL helper 請於 initializers/suepr_table.rb 自行混入
 
-## License
+```ruby
+SuperTable::Builder.send(:include, ::Rails.application.routes.url_helpers)
+SuperTable::Record.send(:include, ::Rails.application.routes.url_helpers)
+SuperTable::Tableable.send(:include, ::Rails.application.routes.url_helpers)
+```
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+# SuperSpreadsheet::Loader
+
+```ruby
+@spreadsheet = SuperSpreadsheet::Loader.new("/tmp/xxx.csv").tap { |s| s.call }
+@spreadsheet = SuperSpreadsheet::Loader.new("/tmp/xxx.xls").tap { |s| s.call }
+@spreadsheet = SuperSpreadsheet::Loader.new("/tmp/xxx.xlsx").tap { |s| s.call }
+
+@spreadsheet.result
+#=> [ [ '欄位1', '欄位2', '欄位3' ], [ '資料1', '資料2', '資料3'] ]
+```
+
+# SuperSearch::Scroll
+
+```ruby
+::SuperSearch::Scroll.new(Member, options: { where: { age: 20 } })
+```
+
+# SuperInteraction
+
+### app/controllers/application_controller.rb
+
+```ruby
+class ApplicationController < ActionController::Base
+  include SuperInteraction::ControllerHelper
+end
+```
+
+### app/controllers/members_controller.rb
+
+```ruby
+class MembersController < ApplicationController
+  # GET /
+  def index
+    js.alert("Helloworld").reload.run
+  end
+
+  # GET /
+  def new
+    @member = Member.new
+    # View: app/views/members/edit.html.haml
+    # Layout: app/views/layouts/modal.html.haml
+    js.modal(partial: :edit).run
+  end
+end
+```
+
+### app/views/layouts/modal.html.haml
+
+```haml
+.modal
+  = yield :wrapper
+  .modal-dialog{ class: "modal-#{bs_modal_size}" }
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          = fa_icon('times')
+        = yield :header
+        - if title.present?
+          %h4.modal-title= title
+      = yield
+      = yield :before_body
+      - body_html = capture { yield :body }
+      - if body_html.present?
+        .modal-body= body_html
+      = yield :after_body
+
+      - footer_html = capture { yield :footer }
+      - if footer_html.present?
+        .modal-footer= footer_html
+
+```
