@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"
+  spec.add_dependency "roo-xls"
   spec.add_dependency "spreadsheet"
   spec.add_dependency "iconv"
   spec.add_dependency "virtus", '~> 1.0.5'
@@ -43,4 +44,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-types", '~> 0.13.2'
   spec.add_dependency 'dry-logic', '~> 0.4.2'
   spec.add_dependency 'forwardable'
+  spec.add_dependency 'warehouse_items', '~> 0.2.0'
 end

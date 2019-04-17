@@ -32,5 +32,10 @@ require 'super_formatter/tcat/import'
 require 'super_formatter/hct/head'
 require 'super_formatter/hct/row'
 require 'super_formatter/hct/import'
+# FORMATTER (SHOPLINE)
+require 'super_formatter/shopline/head'
+require 'super_formatter/shopline/row'
+require 'super_formatter/shopline/order'
+require 'super_formatter/shopline/import'
 module SuperTools
 end

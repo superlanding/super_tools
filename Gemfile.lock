@@ -14,8 +14,10 @@ PATH
       reform (~> 2.2.4)
       reform-rails
       roo
+      roo-xls
       spreadsheet
       virtus (~> 1.0.5)
+      warehouse_items (~> 0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -135,6 +137,10 @@ GEM
     roo (2.7.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
+    roo-xls (1.2.0)
+      nokogiri
+      roo (>= 2.0.0, < 3)
+      spreadsheet (> 0.9.0)
     ruby-ole (1.2.12.2)
     rubyzip (1.2.2)
     shoulda-context (1.2.2)
@@ -150,6 +156,8 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    warehouse_items (0.2.0)
+      activesupport
 
 PLATFORMS
   ruby
