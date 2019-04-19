@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "shoulda-context"
 
 
-  spec.add_dependency "rails", ">= 4", "<= 5"
+  spec.add_dependency "rails", ">= 4"
   # spec.add_dependency "i18n", "< 1"
   # spec.add_dependency "actionview", '>= 4', '<= 6'
   # spec.add_dependency 'activerecord', '>= 4', '<= 6'
