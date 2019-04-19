@@ -1,24 +1,14 @@
 require 'super_form/concerns/atomic_save'
-require 'disposable'
 require 'reform'
 require 'reform/form'
-require 'reform/form/active_record'
-require 'reform/form/active_model'
-require 'reform/form/active_model/form_builder_methods'
-require "reform/form/active_model/validations"
+require 'reform/active_record'
 require "reform/form/coercion"
+require 'disposable'
 require 'disposable/twin/parent'
-
-Reform::Form.class_eval do
-  extend ActiveModel::Naming
-  extend ActiveModel::Translation
-end
 
 class SuperForm::Reform < Reform::Form
   include SuperForm::AtomicSave
-  include ::Reform::Form::ActiveRecord
-  include ::Reform::Form::ActiveModel
-  include ::Reform::Form::ActiveModel::FormBuilderMethods
+  extend ::ActiveModel::Translation
   feature Coercion
 
   # 定義 i18n scope
@@ -33,14 +23,8 @@ class SuperForm::Reform < Reform::Form
   def self.form_name(name)
     # 定義 form name (給 form 用的)
     define_singleton_method :model_name do
-      active_model_name_for(name.to_s.camelize)
+      active_model_name_for(name.to_s.camelize) # Reform::Form::ActiveModel
     end
     model(name)
-  end
-
-  private
-
-  def self.active_model_name_for(string)
-    ::ActiveModel::Name.new(self, nil, string)
   end
 end
