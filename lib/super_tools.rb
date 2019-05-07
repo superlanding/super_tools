@@ -46,6 +46,8 @@ require 'super_interaction/command'
 require 'super_interaction/controller_helper'
 # FORMATTER
 require 'super_logger/formatter'
+# Values
+require 'super_value/base'
 
 module SuperTools
 end
