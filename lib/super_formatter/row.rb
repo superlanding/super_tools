@@ -4,6 +4,13 @@ module SuperFormatter
       find(m)
     end
 
+    def complete?
+      indexes.keys.each do |k, i|
+        return false if send(k).nil?
+      end
+      true
+    end
+
     protected
 
     def find(m)

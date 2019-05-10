@@ -10,6 +10,7 @@ module SuperFormatter
       delegate :total_order_amount, to: :row
       delegate :store_id, to: :row
       delegate :note, to: :row
+      delegate :complete?, to: :row
 
       def order_id
         row.order_id.gsub("#", '')
