@@ -72,7 +72,6 @@ module SuperProcess
     end
 
     def self.method_missing(m, *args, &block)
-      puts "Missing: #{m} -> Context: #{self.inspect}" if Rails.env.development?
       if block_given?
         new.public_send(m, *args, &block)
       else
