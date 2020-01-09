@@ -25,6 +25,10 @@ module SuperTable
       content_tag(:small, *args, &block)
     end
 
+    def del(*args, &block)
+      content_tag(:del, *args, &block)
+    end
+
     def span(*args, &block)
       content_tag(:span, *args, &block)
     end
