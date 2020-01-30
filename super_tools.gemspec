@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "activemodel", '>= 4', '<= 6'
   # spec.add_dependency "activesupport", '>= 4', '<= 6'
   # spec.add_dependency "activeview"
-  spec.add_dependency "nokogiri", ">= 1.6", "<= 1.9.1"
+  spec.add_dependency "nokogiri", ">= 1.6", "<= 1.10.7"
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"
   spec.add_dependency "roo-xls"
