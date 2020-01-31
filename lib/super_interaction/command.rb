@@ -32,12 +32,7 @@ module SuperInteraction
     # 注意：不要包 respond_to :js 會有問題
     def modal(partial: nil, size: 'md', title: '', desc: '')
       partial ||= context.action_name
-      case Rails.version[0]
-      when "4"
-        modal_html = context.render_to_string(partial, layout: 'modal.html.haml', locals: { bs_modal_size: size, title: title, desc: desc })
-      when "5", "6"
-        modal_html = context.render_to_string(partial, layout: 'modal.html.haml', assigns: { bs_modal_size: size, title: title, desc: desc })
-      end
+      modal_html = context.render_to_string(partial, layout: 'modal.html.haml', locals: { bs_modal_size: size, title: title, desc: desc })
       cmd("$(function() { $.modal.show('#{helpers.j(modal_html)}'); });")
     end
 
