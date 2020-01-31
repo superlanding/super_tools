@@ -42,6 +42,7 @@ require 'super_search/scroll'
 # ZIP CODE
 require 'super_zipcode/taiwan'
 # INTERACTION
+require 'super_interaction/engine'
 require 'super_interaction/command'
 require 'super_interaction/controller_helper'
 # FORMATTER
