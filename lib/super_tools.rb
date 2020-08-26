@@ -43,8 +43,10 @@ require 'super_search/scroll'
 require 'super_zipcode/taiwan'
 # INTERACTION
 require 'super_interaction/engine'
-require 'super_interaction/command'
-require 'super_interaction/controller_helper'
+require 'super_interaction/beyond'
+require 'super_interaction/beyond_helper'
+require 'super_interaction/bootstrap'
+require 'super_interaction/bootstrap_helper'
 # FORMATTER
 require 'super_logger/formatter'
 # Values

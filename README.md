@@ -84,7 +84,8 @@ SuperTable::Tableable.send(:include, ::Rails.application.routes.url_helpers)
 
 ```ruby
 class ApplicationController < ActionController::Base
-  include SuperInteraction::ControllerHelper
+  include SuperInteraction::BootstrapHelper
+  include SuperInteraction::BeyondrHelper
 end
 ```
 

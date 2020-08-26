@@ -1,0 +1,27 @@
+- if Rails.version[0].to_i >= 5
+  - size = local_assigns[:size]
+  - title = local_assigns[:title]
+  - desc = local_assigns[:desc]
+  
+.modal{"aria-labelledby" => "modalLabel", "data-modal" => "box-modal", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        = yield :header
+        - if title
+          %h5#modalLabel.modal-title
+            = title
+            %small= desc if desc
+        %button.btn-close{"aria-label" => "Close", "data-close" => "", :type => "button"}
+          %i.icon.icon-cross
+      = yield
+      = yield :before_body
+      - body_html = capture { yield :body }
+      - if body_html.present?
+        .modal-body.bg-content= body_html
+      = yield :after_body
+      - footer_html = capture { yield :footer }
+      - if footer_html.present?
+        .modal-footer
+          = footer_html
+      .hide{ "data-cancel" => "", "data-confirm" => "" }
