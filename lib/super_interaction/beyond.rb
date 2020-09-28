@@ -30,7 +30,7 @@ module SuperInteraction
     # modal 裡如果有 javascript 需寫在 .modal 層
     # size: sm / md / lg / xl / xxl
     # 注意：不要包 respond_to :js 會有問題
-    def modal(action, partial: nil, size: 'md', title: '', desc: '')
+    def modal(action="show", partial: nil, size: 'md', title: '', desc: '')
       case action.to_s
       when "show", "open"
         partial ||= context.action_name
