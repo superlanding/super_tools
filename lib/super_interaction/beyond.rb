@@ -30,17 +30,10 @@ module SuperInteraction
     # modal 裡如果有 javascript 需寫在 .modal 層
     # size: sm / md / lg / xl / xxl
     # 注意：不要包 respond_to :js 會有問題
-    def modal(action="show", partial: nil, size: 'md', title: '', desc: '')
-      case action.to_s
-      when "show", "open"
-        partial ||= context.action_name
-        modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: { modal_size: size, title: title, desc: desc })
-        cmd("$(function() { $.uniqModal().modal('show', '#{helpers.j(modal_html)}'); });")
-      when "hide", "close"
-        close
-      else
-        raise "Not found modal action: #{action}"
-      end
+    def modal(partial: nil, size: 'md', title: '', desc: '')
+      partial ||= context.action_name
+      modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: { modal_size: size, title: title, desc: desc })
+      cmd("$(function() { $.uniqModal().modal('show', '#{helpers.j(modal_html)}'); });")
     end
 
     # 關閉 Modal
