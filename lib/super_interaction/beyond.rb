@@ -30,25 +30,22 @@ module SuperInteraction
     # modal 裡如果有 javascript 需寫在 .modal 層
     # size: sm / md / lg / xl / xxl
     # 注意：不要包 respond_to :js 會有問題
-    def modal(partial: nil, size: 'md', title: '', desc: '')
-      partial ||= context.action_name
-      modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: { b_modal_size: size, title: title, desc: desc })
-      cmd %{
-        (function(){
-          var $box = $("#modal-box");
-          if ($box.size() == 0) {
-            $box = $("<div id='modal-box'></div>");
-            $("body").append($box);
-          }
-          $box.html('#{helpers.j(modal_html)}');
-          new window.beyond.Modal($("<button type='button' data-modal-opener='box-modal'></button>")[0]).show();
-        })();
-      }
+    def modal(action, partial: nil, size: 'md', title: '', desc: '')
+      case action.to_s
+      when "show", "open"
+        partial ||= context.action_name
+        modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: { modal_size: size, title: title, desc: desc })
+        cmd("$(function() { $.uniqModal().modal('show', '#{helpers.j(modal_html)}'); });")
+      when "hide", "close"
+        close
+      else
+        raise "Not found modal action: #{action}"
+      end
     end
 
     # 關閉 Modal
     def close
-      cmd("$.modal.close();")
+      cmd("$.uniqModal().close();")
     end
 
     # 重新讀取頁面

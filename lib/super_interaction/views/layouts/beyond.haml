@@ -8,12 +8,12 @@
     .modal-content
       .modal-header
         = yield :header
-        - if title
-          %h5#modalLabel.modal-title
+        - if title.present?
+          %h4.modal-title
             = title
             %small= desc if desc
-        %button.btn-close{"aria-label" => "Close", "data-close" => "", :type => "button"}
-          %i.icon.icon-cross
+        %button.btn-close{'aria-label': 'Close', 'data-close': true, 'type': 'button'}
+          = b_icon('cross')
       = yield
       = yield :before_body
       - body_html = capture { yield :body }

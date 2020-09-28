@@ -1,9 +1,13 @@
 module SuperInteraction
   module BeyondHelper
-    def beyond(&block)
+    def srj(&block)
       i = Beyond.new(self)
-      yield(i) if block_given?
-      i
+      if block_given?
+        yield(i)
+        i.run
+      else
+        i
+      end
     end
   end
 end
