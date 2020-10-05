@@ -38,7 +38,7 @@ module SuperInteraction
 
     # 關閉 Modal
     def close
-      cmd("$.uniqModal().close();")
+      cmd("$.uniqModal().modal('hide');")
     end
 
     # 重新讀取頁面
