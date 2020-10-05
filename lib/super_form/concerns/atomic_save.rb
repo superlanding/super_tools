@@ -7,28 +7,39 @@ module SuperForm
 
       define_callbacks :transaction, :queries, :validations
 
-      def self.before_transaction(method_name)
-        set_callback :transaction, :before, method_name
+      def self.before_transaction(method_name=nil, &block)
+        set_defined_callback(:transaction, :before, method_name, &block)
       end
 
-      def self.before_queries(method_name)
-        set_callback :queries, :before, method_name
+      def self.before_queries(method_name=nil, &block)
+        set_defined_callback(:queries, :before, method_name, &block)
       end
 
-      def self.before_commit(method_name)
-        set_callback :queries, :after, method_name
+      def self.before_commit(method_name=nil, &block)
+        set_defined_callback(:queries, :after, method_name, &block)
       end
 
-      def self.after_commit(method_name)
-        set_callback :transaction, :after, method_name
+      def self.after_commit(method_name=nil, &block)
+        set_defined_callback(:transaction, :after, method_name, &block)
       end
 
-      def self.before_validations(method_name)
-        set_callback :validations, :after, method_name
+      def self.before_validations(method_name=nil, &block)
+        set_defined_callback(:validations, :before, method_name, &block)
       end
 
-      def self.after_validations(method_name)
-        set_callback :validations, :after, method_name
+      def self.after_validations(method_name=nil, &block)
+        set_defined_callback(:validations, :after, method_name, &block)
+      end
+
+      protected
+
+      def self.set_defined_callback(event, callback, method_name=nil, &block)
+        raise "wrong number of arguments ('method_name' or 'block' choose one)" if method_name.nil? == false && block.present?
+        if block_given?
+          set_callback event, callback, &block
+        else
+          set_callback event, callback, method_name
+        end
       end
     end
 

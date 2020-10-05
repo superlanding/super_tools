@@ -1,3 +1,4 @@
+require 'active_support/core_ext/string/strip'
 require 'test_helper'
 
 class SuperTableTest < SuperTable::Tableable
