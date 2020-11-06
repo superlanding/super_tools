@@ -4,7 +4,7 @@
   - desc = local_assigns[:desc]
 
 .modal{"aria-labelledby" => "modalLabel", "data-modal" => "box-modal", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
+  .modal-dialog{ role: 'document', class: "modal-#{size}" }
     .modal-content
       .modal-header
         = yield :header
