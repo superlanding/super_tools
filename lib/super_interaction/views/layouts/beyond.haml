@@ -2,9 +2,10 @@
   - size = local_assigns[:size]
   - title = local_assigns[:title]
   - desc = local_assigns[:desc]
+  - classname = local_assigns[:classname]
 
 .modal{"aria-labelledby" => "modalLabel", "data-modal" => "box-modal", :role => "dialog", :tabindex => "-1"}
-  .modal-dialog{ role: 'document', class: "modal-#{size}" }
+  .modal-dialog{ role: 'document', class: "modal-#{size} #{classname}" }
     .modal-content
       .modal-header
         = yield :header
