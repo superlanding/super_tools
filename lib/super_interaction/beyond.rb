@@ -6,7 +6,7 @@ module SuperInteraction
     delegate :helpers, to: :context
 
     def run
-      context.render js: (commands || []).join(";")
+      context.render js: (commands || []).join(";"), layout: false
     end
 
     def b_notice(message)
