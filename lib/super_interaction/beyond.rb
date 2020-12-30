@@ -30,15 +30,16 @@ module SuperInteraction
     # modal 裡如果有 javascript 需寫在 .modal 層
     # size: sm / md / lg / xl / xxl
     # 注意：不要包 respond_to :js 會有問題
-    def modal(partial: nil, size: 'md', title: '', desc: '')
+    def modal(partial: nil, size: 'md', title: '', desc: '', classname: '')
       partial ||= context.action_name
-      modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: { modal_size: size, title: title, desc: desc })
+      locals = { size: size, title: title, desc: desc, classname: classname }
+      modal_html = context.render_to_string(partial, layout: "beyond.haml", locals: locals)
       cmd("$(function() { $.uniqModal().modal('show', '#{helpers.j(modal_html)}'); });")
     end
 
     # 關閉 Modal
     def close
-      cmd("$.uniqModal().close();")
+      cmd("$.uniqModal().modal('hide');")
     end
 
     # 重新讀取頁面
