@@ -1,0 +1,28 @@
+- if Rails.version[0].to_i >= 5
+  - bs_modal_size = local_assigns[:bs_modal_size]
+  - title = local_assigns[:title]
+  - desc = local_assigns[:desc]
+.modal
+  = yield :wrapper
+  .modal-dialog{ class: "modal-#{bs_modal_size}" }
+    .modal-content
+      .modal-header
+        = yield :header
+        - if title.present?
+          %h5.modal-title
+            = title
+            - if desc.present?
+              %small.text-secondary= desc
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          = fas_icon('times')
+
+      = yield
+      = yield :before_body
+      - body_html = capture { yield :body }
+      - if body_html.present?
+        .modal-body= body_html
+      = yield :after_body
+
+      - footer_html = capture { yield :footer }
+      - if footer_html.present?
+        .modal-footer= footer_html

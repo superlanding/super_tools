@@ -15,6 +15,7 @@
         = yield :header
         - if title.present?
           %h4.modal-title= title
+
       = yield
       = yield :before_body
       - body_html = capture { yield :body }

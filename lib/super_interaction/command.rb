@@ -32,7 +32,7 @@ module SuperInteraction
     # 注意：不要包 respond_to :js 會有問題
     def modal(partial: nil, size: 'md', title: '', desc: '')
       partial ||= context.action_name
-      modal_html = context.render_to_string(partial, layout: "interaction_modal.html.haml", locals: { bs_modal_size: size, title: title, desc: desc })
+      modal_html = context.render_to_string(partial, layout: ::SuperInteraction::Layout.modal_layout, locals: { bs_modal_size: size, title: title, desc: desc })
       cmd("$(function() { $.modal.show('#{helpers.j(modal_html)}'); });")
     end
 
