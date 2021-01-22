@@ -8,7 +8,10 @@
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          = fa_icon('times')
+          - if respond_to?(:fa_icon)
+            = fa_icon('times')
+          - else
+            = fas_icon('times')
         = yield :header
         - if title.present?
           %h4.modal-title= title
