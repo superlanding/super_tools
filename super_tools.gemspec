@@ -1,9 +1,9 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "super_tools/version"
 
 Gem::Specification.new do |spec|
+
   spec.name          = "super_tools"
   spec.version       = SuperTools::VERSION
   spec.authors       = ["eddie"]
@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "shoulda-context"
-
 
   spec.add_dependency "rails", ">= 4"
   spec.add_dependency "nokogiri", ">= 1.6"
