@@ -36,9 +36,9 @@ end
 @service = BillingCalculate.new(@billing)
 @service.call(total_orders_amount: "100")
 #=> true
-@service.total_orders_amount 
+@service.total_orders_amount
 #=> 100
-@service.result 
+@service.result
 #=> "RESULT_OBJECT"
 @service.error_messages
 #=> ""
