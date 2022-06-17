@@ -1,4 +1,3 @@
-require 'iconv'
 require 'csv'
 require 'roo'
 require 'roo-xls'
@@ -55,10 +54,10 @@ module SuperSpreadsheet
     def csv_content!
       @decode_csv_content ||= begin
         csv_content_big5!
-      rescue Iconv::IllegalSequence
+      rescue
         begin
           csv_content_big5_hkscs!
-        rescue Iconv::IllegalSequence
+        rescue
           csv_content
         end
       end
@@ -71,11 +70,11 @@ module SuperSpreadsheet
     private
 
     def csv_content_big5!
-      Iconv.new("utf-8", "Big5//TRANSLIT//IGNORE").iconv(csv_content)
+      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5, invalid: :replace, undef: :replace, replace: '')
     end
 
     def csv_content_big5_hkscs!
-      Iconv.new("utf-8", "Big5-HKSCS//TRANSLIT//IGNORE").iconv(csv_content)
+      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5_HKSCS, invalid: :replace, undef: :replace, replace: '')
     end
 
     def convert_float_to_integer(row)
