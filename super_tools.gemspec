@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", ">= 12.2"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "shoulda-context"
+  spec.add_development_dependency "warning"
 
   spec.add_dependency "rails", "6.1.6"
   spec.add_dependency "nokogiri", ">= 1.6"
