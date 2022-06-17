@@ -1,6 +1,7 @@
 require 'csv'
 require 'roo'
 require 'roo-xls'
+
 module SuperSpreadsheet
   class Loader < SuperProcess::Core
     attr_accessor :file_path
