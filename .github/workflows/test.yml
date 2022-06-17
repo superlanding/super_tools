@@ -16,7 +16,6 @@ jobs:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0.4'
           bundler-cache: true
       - run: bundle
       - run: bundle exec rake t
