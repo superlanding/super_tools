@@ -28,21 +28,21 @@ describe "SuperTable::ViewHelpersTest" do
   include BuildOrdersHelper
 
   def render(template)
-    lookup_context = ActionView::LookupContext.new(ActionController::Base.view_paths)
-    context = ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
-    renderer = ActionView::Renderer.new(lookup_context)
-    renderer.render(context, inline: template, locals: { table: @table })
+    @renderer.render(@context, inline: template, locals: { table: @table })
       .gsub("\n", "")
   end
 
   before do
     @orders = build_orders
     @table = SuperTableTest.new(@orders)
+
+    lookup_context = ActionView::LookupContext.new([])
+    @context = ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
+    @renderer = ActionView::Renderer.new(lookup_context)
   end
 
   should 'view_helper 應該要有 #super_table' do
-    helper = ActionView::Base.new
-    assert(helper.respond_to?(:super_table))
+    assert(@context.respond_to?(:super_table))
   end
 
   describe "#super_table" do
