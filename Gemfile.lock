@@ -12,7 +12,7 @@ PATH
       reform (= 2.6.2)
       reform-rails
       roo
-      roo-xls
+      roo-xls (= 1.2.0)
       searchkick
       spreadsheet
       virtus (~> 1.0.5)
