@@ -3,8 +3,8 @@ require 'test_helper'
 describe "SuperFormatter::Hct" do
   describe "錯誤的 Encode CSV" do
     before do
-      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/encoding_fail.csv").tap { |s| s.call }; ""
-      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }; ""
+      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/encoding_fail.csv").tap { |s| s.call }
+      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }
     end
 
     should "#result.length = 22" do
@@ -36,8 +36,8 @@ describe "SuperFormatter::Hct" do
 
   describe "單機版 CSV" do
     before do
-      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/local.csv").tap { |s| s.call }; ""
-      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }; ""
+      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/local.csv").tap { |s| s.call }
+      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }
     end
 
     should "#result.length == 78" do
@@ -69,8 +69,8 @@ describe "SuperFormatter::Hct" do
 
   describe "雲端版 CSV" do
     before do
-      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/cloud.csv").tap { |s| s.call }; ""
-      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }; ""
+      @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/cloud.csv").tap { |s| s.call }
+      @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }
     end
 
     should "#result.length == 78" do
