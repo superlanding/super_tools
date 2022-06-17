@@ -26,14 +26,14 @@ end
 
 describe "SuperTable::ViewHelpersTest" do
   include BuildOrdersHelper
-  
+
   def render(template)
     @lookup_context ||= ActionView::LookupContext.new(ActionController::Base.view_paths)
     @context ||= ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
     @view ||= ActionView::Base.new @lookup_context
     @view.render(@context, inline: template, locals: { table: @table }).gsub("\n", "")
   end
-  
+
   before do
     @orders = build_orders
     @table = SuperTableTest.new(@orders)
