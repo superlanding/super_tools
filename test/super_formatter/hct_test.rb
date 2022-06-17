@@ -2,6 +2,7 @@ require 'test_helper'
 
 describe "SuperFormatter::Hct" do
   describe "錯誤的 Encode CSV" do
+
     before do
       @spreadsheet = SuperSpreadsheet::Loader.new("test/support/hct/encoding_fail.csv").tap { |s| s.call }
       @service = SuperFormatter::Hct::Import.new(@spreadsheet).tap { |s| s.call }
@@ -98,5 +99,6 @@ describe "SuperFormatter::Hct" do
         assert_equal '6776683723', @row.tracking_code
       end
     end
+
   end
 end
