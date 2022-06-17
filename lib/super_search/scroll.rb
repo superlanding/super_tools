@@ -1,4 +1,5 @@
 require 'searchkick'
+
 module SuperSearch
   class Scroll
     attr_accessor :expire_time, :size, :query
@@ -71,4 +72,5 @@ module SuperSearch
         end
       end
     end
+
   end
