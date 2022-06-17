@@ -36,6 +36,7 @@ describe "SuperTable::ViewHelpersTest" do
     @orders = build_orders
     @table = SuperTableTest.new(@orders)
 
+    # https://stackoverflow.com/questions/70011135/render-js-erb-view-on-rails-6
     lookup_context = ActionView::LookupContext.new([])
     @context = ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
     @renderer = ActionView::Renderer.new(lookup_context)
