@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "iconv"
   spec.add_dependency "virtus", "~> 1.0.5"
   spec.add_dependency "reform-rails"
-  spec.add_dependency "reform", "~> 2.2.4"
+  spec.add_dependency "reform", "2.6.2"
   spec.add_dependency "dry-types", "~> 0.13.2"
   spec.add_dependency "dry-logic", "~> 0.4.2"
   spec.add_dependency "forwardable"
