@@ -68,9 +68,9 @@ module SuperSearch
     # 開始遍歷搜尋
     def search(&block)
       while r = query.execute and not r.response['hits']['hits'].empty? do
-          block.call(r.results, r.total_count) if block
-        end
+        block.call(r.results, r.total_count) if block
       end
     end
 
   end
+end
