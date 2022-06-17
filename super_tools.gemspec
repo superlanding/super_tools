@@ -1,14 +1,13 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "super_tools/version"
 
 Gem::Specification.new do |spec|
+
   spec.name          = "super_tools"
   spec.version       = SuperTools::VERSION
   spec.authors       = ["eddie"]
   spec.email         = ["eddie.li.624@gmail.com"]
-
   spec.summary       = %q{Rails 開發環境常用工具 Forms/Process/Spreadsheet}
   spec.description   = %q{Rails 開發環境常用工具 Forms/Process/Spreadsheet}
   spec.homepage      = "https://github.com/superlanding/super_tools"
@@ -28,9 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "shoulda-context"
 
-
   spec.add_dependency "rails", ">= 4"
-
   spec.add_dependency "nokogiri", ">= 1.6"
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"
