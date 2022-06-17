@@ -1,0 +1,22 @@
+name: Test
+on:
+  push:
+    branches:
+      - 'fix-**'
+      - 'feat-**'
+      - develop
+      - master
+
+jobs:
+  test:
+    runs-on: buildjet-4vcpu-ubuntu-2004
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.4'
+          bundler-cache: true
+      - run: bundle
+      - run: bundle exec rake t
