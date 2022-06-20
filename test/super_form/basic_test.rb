@@ -16,6 +16,11 @@ describe "SuperForm::BasicTest" do
     attribute :title
   end
 
+  module My
+    class Form < SuperForm::Basic
+    end
+  end
+
   before do
     @params = ActionController::Parameters.new({ title: "title" })
       .permit(:title)
@@ -47,6 +52,16 @@ describe "SuperForm::BasicTest" do
       form = I18nScopeForm.new @params
       assert_equal form.class.i18n_scope, :customized_i18n_prefix
       assert_equal form.model_name.i18n_key, :customized_form_name
+    end
+  end
+
+  describe "active_model_name_for" do
+
+    # https://github.com/rails/rails/blob/v6.1.6/activemodel/lib/active_model/naming.rb#L164
+    # SuperForm::Basic 的 active_model_name_for 把 namespace 強制設定成 nil
+    should "leave namespace untouched" do
+      form = My::Form.new @params
+      assert_equal form.model_name.param_key, 'my_form'
     end
   end
 
