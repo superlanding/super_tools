@@ -48,6 +48,14 @@ describe "SuperForm::BasicDbTest" do
         [:no_type_prop, :name, :default_name, :age, :default_age, :ids, :default_ids, :row]
       )
     end
+
+    should "have default values" do
+      form = SampleForm.new create_params
+      assert_equal form.default_name, "default_name"
+      assert_equal form.default_age, 18
+      assert_equal form.default_ids, [1, 2, 3]
+    end
+
   end
 
   describe "validation" do
