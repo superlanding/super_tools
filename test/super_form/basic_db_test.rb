@@ -3,8 +3,6 @@ require "action_controller"
 
 describe "SuperForm::BasicDbTest" do
 
-  include DbHelper
-
   class Row
   end
 
@@ -35,10 +33,6 @@ describe "SuperForm::BasicDbTest" do
 
   def create_params(h = {})
     ActionController::Parameters.new(h).permit(h.keys)
-  end
-
-  before do
-    init_db
   end
 
   describe "virtus" do
@@ -97,7 +91,4 @@ describe "SuperForm::BasicDbTest" do
     end
   end
 
-  after do
-    clear_db
-  end
 end
