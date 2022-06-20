@@ -1,10 +1,10 @@
-require 'super_form/concerns/atomic_save'
-require 'reform'
-require 'reform/form'
-require 'reform/active_record'
+require "super_form/concerns/atomic_save"
+require "reform"
+require "reform/form"
+require "reform/active_record"
 require "reform/form/coercion"
-require 'disposable'
-require 'disposable/twin/parent'
+require "disposable"
+require "disposable/twin/parent"
 
 class SuperForm::Reform < Reform::Form
   include SuperForm::AtomicSave
