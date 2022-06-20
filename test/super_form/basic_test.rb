@@ -28,7 +28,7 @@ describe "SuperForm::BasicTest" do
 
     attribute :no_type_prop
     attribute :name, String
-    attribute :default_name, String, default: 'default_name'
+    attribute :default_name, String, default: "default_name"
 
     attribute :age, Integer
     attribute :default_age, Integer, default: 18
@@ -84,7 +84,7 @@ describe "SuperForm::BasicTest" do
     # SuperForm::Basic 的 active_model_name_for 把 namespace 強制設定成 nil
     should "leave namespace untouched" do
       form = My::Form.new @params
-      assert_equal form.model_name.param_key, 'my_form'
+      assert_equal form.model_name.param_key, "my_form"
     end
   end
 
