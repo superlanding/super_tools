@@ -22,7 +22,7 @@ describe "SuperForm::BasicDbTest" do
 
     attribute :row, Row
 
-    validates :name, presence: true
+    validates :name, presence: true, length: { minimum: 3 }
 
     def save
       ActiveRecord::Base.transaction do
@@ -39,9 +39,20 @@ describe "SuperForm::BasicDbTest" do
     init_db
   end
 
+  describe "virtus" do
+
+    should "have attributes" do
+      form = SampleForm.new create_params
+      assert_equal(
+        form.attributes.keys,
+        [:no_type_prop, :name, :default_name, :age, :default_age, :ids, :default_ids, :row]
+      )
+    end
+  end
+
   describe "validation" do
 
-    should "invalid" do
+    should "be invalid" do
       params = create_params
       form = SampleForm.new params
       assert form.save == false
