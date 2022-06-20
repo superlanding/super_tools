@@ -202,6 +202,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.4)
     thor (1.2.1)
     thread_safe (0.3.6)
     trailblazer-option (0.1.2)
@@ -230,6 +231,7 @@ DEPENDENCIES
   minitest (~> 5.0)
   rake (>= 12.2)
   shoulda-context
+  sqlite3 (= 1.4.4)
   super_tools!
   warning
 
