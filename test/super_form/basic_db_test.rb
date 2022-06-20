@@ -89,6 +89,12 @@ describe "SuperForm::BasicDbTest" do
       form = SampleForm.new params
       assert form.save == false
     end
+
+    should "be valid" do
+      params = create_params(name: '1337')
+      form = SampleForm.new params
+      assert form.save
+    end
   end
 
   after do
