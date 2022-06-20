@@ -24,6 +24,8 @@ describe "SuperForm::BasicDbTest" do
 
     validates :name, presence: true, length: { minimum: 3 }
 
+    attribute :created_at, DateTime
+
     def save
       ActiveRecord::Base.transaction do
         valid?
@@ -45,7 +47,7 @@ describe "SuperForm::BasicDbTest" do
       form = SampleForm.new create_params
       assert_equal(
         form.attributes.keys,
-        [:no_type_prop, :name, :default_name, :age, :default_age, :ids, :default_ids, :row]
+        [:no_type_prop, :name, :default_name, :age, :default_age, :ids, :default_ids, :row, :created_at]
       )
     end
 
@@ -54,6 +56,28 @@ describe "SuperForm::BasicDbTest" do
       assert_equal form.default_name, "default_name"
       assert_equal form.default_age, 18
       assert_equal form.default_ids, [1, 2, 3]
+    end
+
+    should "be able to assign values" do
+      form = SampleForm.new create_params
+      form.name = "Macdella"
+      form.age = "26"
+      form.created_at = "June 20th, 2022"
+
+      assert_equal form.name, "Macdella"
+      assert_equal form.age, 26
+      assert_equal form.created_at, DateTime.new(2022, 6, 20)
+    end
+
+    should "be able to reset attributes" do
+      form = SampleForm.new create_params
+      assert_equal form.default_name, "default_name"
+
+      form.default_name = "changed"
+      assert_equal form.default_name, "changed"
+
+      form.reset_attribute(:default_name)
+      assert_equal form.default_name, "default_name"
     end
 
   end
