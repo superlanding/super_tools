@@ -21,6 +21,30 @@ describe "SuperForm::BasicTest" do
     end
   end
 
+  class Row
+  end
+
+  class SampleForm < SuperForm::Basic
+
+    attribute :no_type_prop
+    attribute :name, String
+    attribute :default_name, String, default: 'default_name'
+
+    attribute :age, Integer
+    attribute :default_age, Integer, default: 18
+
+    attribute :ids, Array[Integer]
+    attribute :default_ids, Array[Integer], default: [1, 2, 3]
+
+    attribute :row, Row
+
+    validates :name, presence: true
+
+    def save
+      validate
+    end
+  end
+
   before do
     @params = ActionController::Parameters.new({}).permit()
   end
@@ -62,6 +86,13 @@ describe "SuperForm::BasicTest" do
       form = My::Form.new @params
       assert_equal form.model_name.param_key, 'my_form'
     end
+  end
+
+  describe "validation" do
+    params = ActionController::Parameters.new({}).permit()
+    form = SampleForm.new params
+    form.save
+    # TODO: add sqlite
   end
 
 end
