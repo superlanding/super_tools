@@ -1,8 +1,5 @@
 require "test_helper"
 require "action_controller"
-require "reform/rails"
-
-Reform::Rails::Railtie.active_model!
 
 describe "SuperForm::ReformTest" do
 
