@@ -1,4 +1,5 @@
-require 'virtus'
+require "virtus"
+
 module SuperForm
   class Basic
     include ActiveModel::Model
