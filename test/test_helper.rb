@@ -26,6 +26,9 @@ ActiveRecord::Schema.verbose = false
 
 load "#{File.dirname(__FILE__)}/support/schema.rb"
 
+I18n.load_path << Dir['fixtures/locales/*.yml']
+I18n.backend.load_translations
+
 require "warning_ignore"
 require "minitest/autorun"
 require "super_tools"
