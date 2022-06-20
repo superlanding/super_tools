@@ -11,7 +11,8 @@ describe "SuperForm::BasicTest" do
   end
 
   class I18nScopeForm < SuperForm::Basic
-    form_name :i18n_scope_form
+    form_name :customized_form_name
+    i18n_prefix :customized_i18n_prefix
     attribute :title
   end
 
@@ -42,6 +43,11 @@ describe "SuperForm::BasicTest" do
       assert_equal form.model_name.i18n_key, :empty_form
     end
 
+    should "have be able to set i18n_scope" do
+      form = I18nScopeForm.new @params
+      assert_equal form.class.i18n_scope, :customized_i18n_prefix
+      assert_equal form.model_name.i18n_key, :customized_form_name
+    end
   end
 
 end
