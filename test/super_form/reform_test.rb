@@ -28,6 +28,7 @@ describe "SuperForm::ReformTest" do
     should "have set i18n_scope" do
       form = I18nPrefixReform.new @params
       assert_equal form.class.i18n_scope, :wow_prefix
+      assert_equal form.class.model_name.i18n_key, :i18n_prefix_reform
     end
   end
 
