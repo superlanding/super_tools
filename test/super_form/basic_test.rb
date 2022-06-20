@@ -22,8 +22,7 @@ describe "SuperForm::BasicTest" do
   end
 
   before do
-    @params = ActionController::Parameters.new({ title: "title" })
-      .permit(:title)
+    @params = ActionController::Parameters.new({}).permit()
   end
 
   describe "form_name" do
