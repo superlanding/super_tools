@@ -25,12 +25,12 @@ describe "SuperForm::BasicTest" do
 
     should "have default model_name" do
       form = EmptyForm.new @params
-      assert_equal(form.model_name, 'EmptyForm')
+      assert_equal form.model_name, "EmptyForm"
     end
 
     should "have set form_name" do
       form = FormWithFormName.new @params
-      assert_equal(form.model_name, 'MyCustomizedFormName')
+      assert_equal form.model_name, "MyCustomizedFormName"
     end
   end
 
