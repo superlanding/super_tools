@@ -1,15 +1,5 @@
 ---
 en:
-  activemodel:
-    attributes:
-      book:
-        name: Book Name
-    errors:
-      models:
-        book:
-          attributes:
-            name:
-              custom_error_message: Custom Error Message
   forms:
     errors:
       models:
