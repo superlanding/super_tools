@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] = 'test'
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
+require "warning_ignore"
 require "active_model/railtie"
 
 module Dummy
@@ -29,7 +30,8 @@ load "#{File.dirname(__FILE__)}/support/schema.rb"
 I18n.load_path += Dir["#{File.dirname(__FILE__)}/fixtures/locales/*.yml"]
 I18n.backend.load_translations
 
-require "warning_ignore"
+# 使用 ActiveSupport::TestCase 的 use_transactional_tests
+require "rails/test_help"
 require "minitest/autorun"
 require "shoulda-context"
 require "helpers/build_orders_helper"
@@ -37,6 +39,3 @@ require "reform/rails"
 require "super_tools"
 
 Reform::Rails::Railtie.active_model!
-
-# 使用 ActiveSupport::TestCase 的 use_transactional_tests
-require "rails/test_help"
