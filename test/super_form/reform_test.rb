@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-describe "SuperForm::ReformTest" do
+class SuperFormReformTest < MiniTest::Spec
 
   class EmptyReform < SuperForm::Reform
   end
@@ -28,7 +28,7 @@ describe "SuperForm::ReformTest" do
     should "have set i18n_scope" do
       form = I18nPrefixReform.new @params
       assert_equal form.class.i18n_scope, :wow_prefix
-      assert_equal form.class.model_name.i18n_key, :i18n_prefix_reform
+      assert_equal form.class.model_name.i18n_key, :"super_form_reform_test/i18n_prefix_reform"
     end
   end
 
@@ -36,7 +36,7 @@ describe "SuperForm::ReformTest" do
 
     should "have default model_name" do
       form = EmptyReform.new @params
-      assert_equal form.class.model_name.to_s, "EmptyReform"
+      assert_equal form.class.model_name.to_s, "SuperFormReformTest::EmptyReform"
     end
 
     should "have set form_name" do
