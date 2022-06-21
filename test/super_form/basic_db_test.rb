@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-describe "SuperForm::BasicDbTest" do
+class SuperFormBasicDbTest < MiniTest::Spec
 
   class Row
   end

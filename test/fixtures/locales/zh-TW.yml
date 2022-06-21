@@ -3,7 +3,7 @@ zh-TW:
   forms:
     errors:
       models:
-        sample_form:
+        super_form_basic_db_test/sample_form:
           attributes:
             age:
               greater_than_or_equal_to: 警察北北在等你
@@ -11,7 +11,7 @@ zh-TW:
   admin:
     errors:
       models:
-        admin_basic_form:
+        super_form_basic_db_test/admin_basic_form:
           attributes:
             name:
               blank: 名字要填喔

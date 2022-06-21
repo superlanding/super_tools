@@ -3,7 +3,7 @@ en:
   forms:
     errors:
       models:
-        sample_form:
+        super_form_basic_db_test/sample_form:
           attributes:
             age:
               greater_than_or_equal_to: The cop is waiting for you
