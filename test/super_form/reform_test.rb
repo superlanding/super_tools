@@ -3,7 +3,7 @@ require "action_controller"
 
 class SuperFormReformTest < MiniTest::Spec
 
-  class EmptyReform < SuperForm::Reform
+  class EmptyForm < SuperForm::Reform
   end
 
   class I18nPrefixReform < SuperForm::Reform
@@ -21,7 +21,7 @@ class SuperFormReformTest < MiniTest::Spec
   describe "i18n_prefix" do
 
     should "have default i18n_scope" do
-      form = EmptyReform.new @params
+      form = EmptyForm.new @params
       assert_equal form.class.i18n_scope, :activerecord
     end
 
@@ -35,8 +35,8 @@ class SuperFormReformTest < MiniTest::Spec
   describe "form_name" do
 
     should "have default model_name" do
-      form = EmptyReform.new @params
-      assert_equal form.class.model_name.to_s, "SuperFormReformTest::EmptyReform"
+      form = EmptyForm.new @params
+      assert_equal form.class.model_name.to_s, "SuperFormReformTest::EmptyForm"
     end
 
     should "have set form_name" do
