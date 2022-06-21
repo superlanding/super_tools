@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-describe "SuperForm::BasicTest" do
+class SuperFormBasicTest < MiniTest::Spec
 
   class EmptyForm < SuperForm::Basic
   end
@@ -25,7 +25,7 @@ describe "SuperForm::BasicTest" do
 
     should "have default model_name" do
       form = EmptyForm.new
-      assert_equal form.model_name, "EmptyForm"
+      assert_equal form.model_name.to_s, "SuperFormBasicTest::EmptyForm"
     end
 
     should "have set form_name" do
@@ -40,7 +40,7 @@ describe "SuperForm::BasicTest" do
     should "have default i18n_scope" do
       form = EmptyForm.new
       assert_equal form.class.i18n_scope, :forms
-      assert_equal form.model_name.i18n_key, :empty_form
+      assert_equal form.model_name.i18n_key, :"super_form_basic_test/empty_form"
     end
 
     should "be able to set i18n_scope" do
@@ -56,7 +56,7 @@ describe "SuperForm::BasicTest" do
     # SuperForm::Basic 的 active_model_name_for 把 namespace 強制設定成 nil
     should "leave namespace untouched" do
       form = My::Form.new
-      assert_equal form.model_name.param_key, "my_form"
+      assert_equal form.model_name.param_key, "super_form_basic_test_my_form"
     end
   end
 
