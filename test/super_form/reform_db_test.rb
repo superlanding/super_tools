@@ -28,6 +28,47 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     end
   end
 
+  class MethodNameCallbackForm < SuperForm::Reform
+    model :book
+    attr_accessor :called
+
+    before_transaction :before_transaction
+    before_queries :before_queries
+    before_validations :before_validations
+    after_validations :after_validations
+    before_commit :before_commit
+    after_commit :after_commit
+
+    def initialize(book)
+      super book
+      self.called = []
+    end
+
+    def before_transaction
+      called.push :before_transaction
+    end
+
+    def before_queries
+      called.push :before_queries
+    end
+
+    def before_validations
+      called.push :before_validations
+    end
+
+    def after_validations
+      called.push :after_validations
+    end
+
+    def before_commit
+      called.push :before_commit
+    end
+
+    def after_commit
+      called.push :after_commit
+    end
+  end
+
   class CallbackForm < SuperForm::Reform
     model :book
   end
@@ -90,7 +131,15 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
   context "Callbacks" do
 
-    should "call blocks callback" do
+    should "call method_name callbacks" do
+      form = MethodNameCallbackForm.new Book.new(name: "o_o")
+      form.save_with_transaction
+      expected = [ :before_transaction, :before_queries, :before_validations,
+        :after_validations, :before_commit, :after_commit ]
+      assert_equal form.called, expected
+    end
+
+    should "call block callback" do
 
       called = []
 
