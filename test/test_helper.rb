@@ -31,10 +31,10 @@ I18n.backend.load_translations
 
 require "warning_ignore"
 require "minitest/autorun"
-require "super_tools"
 require "shoulda-context"
 require "helpers/build_orders_helper"
 require "reform/rails"
+require "super_tools"
 
 Reform::Rails::Railtie.active_model!
 
