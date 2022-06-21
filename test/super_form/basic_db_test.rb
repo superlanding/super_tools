@@ -21,6 +21,7 @@ describe "SuperForm::BasicDbTest" do
     attribute :row, Row
 
     validates :name, presence: true, length: { minimum: 3 }
+    validates :age, presence: true, numericality: { greater_than_or_equal_to: 18 }
 
     attribute :created_at, DateTime
 
@@ -85,9 +86,28 @@ describe "SuperForm::BasicDbTest" do
     end
 
     should "be valid" do
-      params = create_params(name: '1337')
+      params = create_params(name: '1337', age: 18)
       form = SampleForm.new params
       assert form.save
+    end
+  end
+
+  describe "i18n error messages" do
+
+    # https://github.com/rails/rails/blob/v6.1.6/activemodel/lib/active_model/error.rb#L80
+    should "default i18n_scope: forms" do
+      params = create_params(age: 17)
+      form = SampleForm.new params
+      form.save
+
+      # Rails 預設
+      assert_equal form.errors[:name].first, "can't be blank"
+
+      # locales/en.yml 有設定
+      assert_equal form.errors[:age].first, "The cop is waiting for you"
+
+      I18n.locale = :"zh-TW"
+      assert_equal form.errors[:age].first, "警察北北在等你"
     end
   end
 
