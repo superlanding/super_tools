@@ -37,3 +37,6 @@ require "helpers/build_orders_helper"
 require "reform/rails"
 
 Reform::Rails::Railtie.active_model!
+
+# 使用 ActiveSupport::TestCase 的 use_transactional_tests
+require "rails/test_help"
