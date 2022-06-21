@@ -58,4 +58,31 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     end
   end
 
+  context "Saving" do
+
+    should "be able to save" do
+      # 未新增
+      assert_equal Book.all.size, 0
+
+      # 新增
+      form = SampleForm.new Book.new(name: "三民主義")
+      form.save
+      assert_equal Book.all.size, 1
+      assert_equal Book.first.name, "三民主義"
+
+      # 編輯
+      form.save(name: "吾黨所宗")
+      assert_equal Book.all.size, 1
+      assert_equal Book.first.name, "吾黨所宗"
+    end
+
+    should "be able to validate" do
+      # 沒給書名
+      form = SampleForm.new Book.new
+      form.save
+      assert_equal Book.all.size, 0
+      assert form.errors[:name].present?
+    end
+  end
+
 end
