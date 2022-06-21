@@ -8,12 +8,6 @@ module SuperForm
     include ActiveModel::Validations
     include Virtus.model
 
-    def sync_params(params)
-      params.each do |attr, value|
-        public_send("#{attr}=", value) if respond_to?("#{attr}=")
-      end
-    end
-
     class << self
       def form_name(name)
         # 定義 form name (給 form 用的)
