@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-class SuperFormBasicDbTest < MiniTest::Spec
+class SuperFormBasicDbTest < ActiveSupport::TestCase
 
   class Row
   end
@@ -41,15 +41,27 @@ class SuperFormBasicDbTest < MiniTest::Spec
     end
   end
 
+  class BookForm < SuperForm::Basic
+    attribute :name, String
+    validates :name, presence: true
+
+    def save
+      ActiveRecord::Base.transaction do
+        return false unless valid?
+        Book.create attributes
+      end
+    end
+  end
+
   def create_params(h = {})
     ActionController::Parameters.new(h).permit(h.keys)
   end
 
-  before do
+  setup do
     I18n.locale = :en
   end
 
-  describe "virtus" do
+  context "virtus" do
 
     should "have attributes" do
       form = SampleForm.new create_params
@@ -90,7 +102,7 @@ class SuperFormBasicDbTest < MiniTest::Spec
 
   end
 
-  describe "validation" do
+  context "validation" do
 
     should "be invalid" do
       params = create_params
@@ -105,7 +117,7 @@ class SuperFormBasicDbTest < MiniTest::Spec
     end
   end
 
-  describe "i18n error messages" do
+  context "i18n error messages" do
 
     # https://github.com/rails/rails/blob/v6.1.6/activemodel/lib/active_model/error.rb#L80
     should "default i18n_scope: forms" do
@@ -132,7 +144,23 @@ class SuperFormBasicDbTest < MiniTest::Spec
       I18n.locale = :"zh-TW"
       assert_equal form.errors[:name].first, "名字要填喔"
     end
+  end
 
+  context "save behavior" do
+
+    should "be able to create" do
+      params = create_params(name: "小王子")
+      form = BookForm.new params
+      form.save
+      assert_equal Book.all.size, 1
+    end
+
+    should "not be able to create" do
+      params = create_params
+      form = BookForm.new params
+      form.save
+      assert_equal Book.all.size, 0
+    end
   end
 
 end
