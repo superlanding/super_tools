@@ -10,3 +10,10 @@ en:
           attributes:
             name:
               custom_error_message: Custom Error Message
+  forms:
+    errors:
+      models:
+        sample_form:
+          attributes:
+            age:
+              greater_than_or_equal_to: The cop is waiting for you
