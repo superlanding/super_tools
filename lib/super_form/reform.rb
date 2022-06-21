@@ -25,6 +25,7 @@ class SuperForm::Reform < Reform::Form
     define_singleton_method :model_name do
       active_model_name_for(name.to_s.camelize) # Reform::Form::ActiveModel
     end
+    # 這行很可能沒有作用
     model(name)
   end
 end
