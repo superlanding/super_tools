@@ -1,5 +1,6 @@
 ---
 zh-TW:
+  # SuperForm::Basic
   forms:
     errors:
       models:
@@ -15,3 +16,21 @@ zh-TW:
           attributes:
             name:
               blank: 名字要填喔
+
+
+  # SuperForm::Reform
+  activerecord:
+    errors:
+      models:
+        sample_form:
+          attributes:
+            name:
+              blank: 書名不可以空白
+
+  another_prefix:
+    errors:
+      models:
+        another_form:
+          attributes:
+            name:
+              blank: 書名不可以空白，請填寫書名
