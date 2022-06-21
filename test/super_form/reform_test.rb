@@ -19,12 +19,18 @@ class SuperFormReformTest < MiniTest::Spec
   # 把 Reform::Form::ActiveModel 的 model_name 蓋掉了
   # 所以底下的測試 model_name 不會被改到
   #
-  # 但是如果是透過 validate 等相關函式觸發的 model_name
-  # 底下的 model 設定還是會有效果
+  # 但是如果是透過 validate 等相關函式觸發的 reform-rails model_name
+  # 底下的 model 設定還是不會有效果
+  # 因為吃不到 model 設定的 self.model_options
   # 詳情請參考
   # https://github.com/trailblazer/reform-rails/blob/v0.2.3/lib/reform/form/active_model/validations.rb
   class ModelNamedForm < SuperForm::Reform
     model :ok
+    property :name
+    validates :name, presence: true
+    def save(params = {})
+      validate params
+    end
   end
 
   before do
@@ -60,8 +66,13 @@ class SuperFormReformTest < MiniTest::Spec
 
   describe "model" do
     should "have no effect at all" do
-      form = ModelNamedForm.new @params
+      form = ModelNamedForm.new Book.new
+      form.save
       assert_equal form.model_name.to_s, "SuperFormReformTest::ModelNamedForm"
+
+      # 吃不到 model 設定的 self.model_options
+      names = form.class.lookup_ancestors.map { |klass| klass.model_name.to_s }
+      assert_equal names, ["SuperFormReformTest::ModelNamedForm", "SuperForm::Reform", "Reform"]
     end
   end
 
