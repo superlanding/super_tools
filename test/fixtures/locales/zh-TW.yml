@@ -1,0 +1,9 @@
+---
+en:
+  forms:
+    errors:
+      models:
+        sample_form:
+          attributes:
+            age:
+              greater_than_or_equal_to: 警察北北在等你
