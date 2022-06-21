@@ -73,6 +73,11 @@ class SuperFormReformTest < MiniTest::Spec
       # 吃不到 model 設定的 self.model_options
       names = form.class.lookup_ancestors.map { |klass| klass.model_name.to_s }
       assert_equal names, ["SuperFormReformTest::ModelNamedForm", "SuperForm::Reform", "Reform"]
+
+      # 透過 form_name 再改掉 form.model_name
+      form.class.form_name :huh
+      names = form.class.lookup_ancestors.map { |klass| klass.model_name.to_s }
+      assert_equal names, ["Huh", "SuperForm::Reform", "Reform"]
     end
   end
 
