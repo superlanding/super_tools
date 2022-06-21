@@ -5,7 +5,6 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
     form_name :sample_form
-    model :book
     property :name
     validates :name, presence: true
 
@@ -18,7 +17,6 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
   class AnotherForm < SuperForm::Reform
     i18n_prefix :another_prefix
     form_name :another_form
-    model :book
     property :name
     validates :name, presence: true
 
@@ -29,7 +27,6 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
   end
 
   class MethodNameCallbackForm < SuperForm::Reform
-    model :book
     attr_accessor :called
 
     before_transaction :before_transaction
@@ -70,7 +67,6 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
   end
 
   class CallbackForm < SuperForm::Reform
-    model :book
   end
 
   def create_params(h = {})
