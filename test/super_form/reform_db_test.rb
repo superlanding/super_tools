@@ -28,6 +28,9 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     end
   end
 
+  class CallbackForm < SuperForm::Reform
+    model :book
+  end
 
   def create_params(h = {})
     ActionController::Parameters.new(h).permit(h.keys)
@@ -82,6 +85,52 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       form.save
       assert_equal Book.all.size, 0
       assert form.errors[:name].present?
+    end
+  end
+
+  context "Callbacks" do
+
+    should "call blocks callback" do
+
+      called = []
+
+      CallbackForm.before_transaction do
+        called.push :before_transaction
+      end
+
+      CallbackForm.before_queries do
+        called.push :before_queries
+      end
+
+      CallbackForm.before_commit do
+        called.push :before_commit
+      end
+
+      CallbackForm.after_commit do
+        called.push :after_commit
+      end
+
+      CallbackForm.before_validations do
+        called.push :before_validations
+      end
+
+      CallbackForm.after_validations do
+        called.push :after_validations
+      end
+
+      form = CallbackForm.new Book.new(name: "ruby 圈: 不給我 merge ? 看我 monkey patch 你的 code")
+      form.save_with_transaction
+
+      # 有呼叫順序
+      expected = [
+        :before_transaction,
+        :before_queries,
+        :before_validations,
+        :after_validations,
+        :before_commit,
+        :after_commit
+      ]
+      assert_equal called, expected
     end
   end
 
