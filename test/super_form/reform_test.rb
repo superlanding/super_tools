@@ -18,6 +18,9 @@ class SuperFormReformTest < MiniTest::Spec
   # SuperForm::Reform 的 extend ::ActiveModel::Translation
   # 把 Reform::Form::ActiveModel 的 model_name 蓋掉了
   # 所以底下的測試 model_name 不會被改到
+  #
+  # 但是如果是透過 validate 等相關函式觸發的 model_name
+  # 底下的 model 設定還是會有效果
   class ModelNamedForm < SuperForm::Reform
     model :ok
   end
