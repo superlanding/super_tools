@@ -20,7 +20,6 @@ class SuperForm::Reform < Reform::Form
 
   self.i18n_prefix :activerecord
 
-  # https://trailblazer.to/2.0/gems/reform/rails.html#activemodel-compliance
   def self.form_name(name)
     # 定義 form name (給 form 用的)
     define_singleton_method :model_name do

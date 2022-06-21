@@ -14,6 +14,15 @@ class SuperFormReformTest < MiniTest::Spec
     form_name :one_ok_form
   end
 
+  # https://trailblazer.to/2.0/gems/reform/rails.html#activemodel-compliance
+  # 根據官網的做法應該是要在 SuperForm::Reform
+  # include Reform::Form::ActiveModel，使用 model 才會有效果
+  # 所以底下的測試 model_name 不會被改到
+  class ModelNamedForm < SuperForm::Reform
+    include Reform::Form::ActiveModel
+    model :ok
+  end
+
   before do
     @params = ActionController::Parameters.new({}).permit()
   end
@@ -42,6 +51,13 @@ class SuperFormReformTest < MiniTest::Spec
     should "have set form_name" do
       form = NamedForm.new @params
       assert_equal form.class.model_name.to_s, "OneOkForm"
+    end
+  end
+
+  describe "model" do
+    should "have no effect at all" do
+      form = ModelNamedForm.new @params
+      assert_equal form.model_name.to_s, "SuperFormReformTest::ModelNamedForm"
     end
   end
 
