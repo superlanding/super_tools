@@ -6,7 +6,7 @@ class SuperFormReformTest < MiniTest::Spec
   class EmptyForm < SuperForm::Reform
   end
 
-  class I18nPrefixReform < SuperForm::Reform
+  class PrefixForm < SuperForm::Reform
     i18n_prefix :wow_prefix
   end
 
@@ -26,9 +26,9 @@ class SuperFormReformTest < MiniTest::Spec
     end
 
     should "have set i18n_scope" do
-      form = I18nPrefixReform.new @params
+      form = PrefixForm.new @params
       assert_equal form.class.i18n_scope, :wow_prefix
-      assert_equal form.class.model_name.i18n_key, :"super_form_reform_test/i18n_prefix_reform"
+      assert_equal form.class.model_name.i18n_key, :"super_form_reform_test/prefix_form"
     end
   end
 
