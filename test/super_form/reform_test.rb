@@ -10,7 +10,7 @@ class SuperFormReformTest < MiniTest::Spec
     i18n_prefix :wow_prefix
   end
 
-  class ReformWithFormName < SuperForm::Reform
+  class NamedForm < SuperForm::Reform
     form_name :one_ok_form
   end
 
@@ -40,7 +40,7 @@ class SuperFormReformTest < MiniTest::Spec
     end
 
     should "have set form_name" do
-      form = ReformWithFormName.new @params
+      form = NamedForm.new @params
       assert_equal form.class.model_name.to_s, "OneOkForm"
     end
   end
