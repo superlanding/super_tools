@@ -3,7 +3,7 @@ require "action_controller"
 
 describe "SuperForm::BasicTest" do
 
-  class EmptyForm < SuperForm::Basic
+  class BasicEmptyForm < SuperForm::Basic
   end
 
   class FormWithFormName < SuperForm::Basic
@@ -24,8 +24,8 @@ describe "SuperForm::BasicTest" do
   describe "form_name" do
 
     should "have default model_name" do
-      form = EmptyForm.new
-      assert_equal form.model_name, "EmptyForm"
+      form = BasicEmptyForm.new
+      assert_equal form.model_name, "BasicEmptyForm"
     end
 
     should "have set form_name" do
@@ -38,9 +38,9 @@ describe "SuperForm::BasicTest" do
 
     # https://github.com/rails/rails/blob/v6.1.6/activemodel/lib/active_model/error.rb#L38
     should "have default i18n_scope" do
-      form = EmptyForm.new
+      form = BasicEmptyForm.new
       assert_equal form.class.i18n_scope, :forms
-      assert_equal form.model_name.i18n_key, :empty_form
+      assert_equal form.model_name.i18n_key, :basic_empty_form
     end
 
     should "be able to set i18n_scope" do
