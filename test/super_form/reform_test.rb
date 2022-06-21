@@ -15,11 +15,10 @@ class SuperFormReformTest < MiniTest::Spec
   end
 
   # https://trailblazer.to/2.0/gems/reform/rails.html#activemodel-compliance
-  # 根據官網的做法應該是要在 SuperForm::Reform
-  # include Reform::Form::ActiveModel，使用 model 才會有效果
+  # SuperForm::Reform 的 extend ::ActiveModel::Translation
+  # 把 Reform::Form::ActiveModel 的 model_name 蓋掉了
   # 所以底下的測試 model_name 不會被改到
   class ModelNamedForm < SuperForm::Reform
-    include Reform::Form::ActiveModel
     model :ok
   end
 
