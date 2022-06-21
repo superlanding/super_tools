@@ -32,8 +32,21 @@ describe "SuperForm::BasicDbTest" do
     end
   end
 
+  class AdminBasicForm < SuperForm::Basic
+    i18n_prefix :admin
+    attribute :name, String
+    validates :name, presence: true
+    def save
+      valid?
+    end
+  end
+
   def create_params(h = {})
     ActionController::Parameters.new(h).permit(h.keys)
+  end
+
+  before do
+    I18n.locale = :en
   end
 
   describe "virtus" do
@@ -109,6 +122,17 @@ describe "SuperForm::BasicDbTest" do
       I18n.locale = :"zh-TW"
       assert_equal form.errors[:age].first, "警察北北在等你"
     end
+
+    should "set i18n_scope: admin" do
+      form = AdminBasicForm.new create_params
+      form.save
+
+      assert_equal form.errors[:name].first, "can't be blank"
+
+      I18n.locale = :"zh-TW"
+      assert_equal form.errors[:name].first, "名字要填喔"
+    end
+
   end
 
 end

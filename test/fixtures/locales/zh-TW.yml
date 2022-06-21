@@ -7,3 +7,11 @@ zh-TW:
           attributes:
             age:
               greater_than_or_equal_to: 警察北北在等你
+
+  admin:
+    errors:
+      models:
+        admin_basic_form:
+          attributes:
+            name:
+              blank: 名字要填喔
