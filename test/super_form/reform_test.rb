@@ -21,6 +21,8 @@ class SuperFormReformTest < MiniTest::Spec
   #
   # 但是如果是透過 validate 等相關函式觸發的 model_name
   # 底下的 model 設定還是會有效果
+  # 詳情請參考
+  # https://github.com/trailblazer/reform-rails/blob/v0.2.3/lib/reform/form/active_model/validations.rb
   class ModelNamedForm < SuperForm::Reform
     model :ok
   end
