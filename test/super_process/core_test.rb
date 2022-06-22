@@ -12,6 +12,9 @@ class SuperProcessCoreTest < MiniTest::Spec
     validate :validate_book_name
 
     before_call :before_call
+    after_call :after_call
+    before_task :before_task
+    after_task :after_task
 
     callable do
       logs.push :callable
@@ -36,6 +39,10 @@ class SuperProcessCoreTest < MiniTest::Spec
     def validate_book_name
       # 不可以髒髒
       errors.add(:name, "Invalid book name") if book.name.include?("Shit")
+    end
+
+    def name=(value)
+      book.name = value
     end
   end
 
@@ -67,6 +74,11 @@ class SuperProcessCoreTest < MiniTest::Spec
       end
       # validation 沒過，所以只有 :before_call
       assert_equal @cover.logs, [:before_call]
+    end
+
+    should "have expected callbacks" do
+      @cover.call!(name: "Rubyist in a nutshell")
+      assert_equal @cover.logs, [:before_call, :before_task, :callable, :after_task, :after_call]
     end
 
   end
