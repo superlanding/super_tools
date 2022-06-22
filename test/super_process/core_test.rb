@@ -109,4 +109,17 @@ class SuperProcessCoreTest < MiniTest::Spec
     end
   end
 
+  describe "error_messages" do
+
+    should "have error messages" do
+      @cover.call
+      assert_equal @cover.error_messages, "Invalid book name"
+    end
+
+    should "not have error message" do
+      @cover.call(name: "死了都要 code，不淋漓盡致不痛快")
+      assert_equal @cover.error_messages, ""
+    end
+  end
+
 end
