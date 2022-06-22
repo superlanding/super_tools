@@ -76,6 +76,12 @@ class SuperProcessCoreTest < MiniTest::Spec
       assert_equal @cover.logs, [:before_call]
     end
 
+    # 驗證前                before_call
+    # 驗證
+    # 驗證成功後            before_task
+    # 執行 callable block
+    # callable block 結束   after_task
+    #                       after_call
     should "have expected callbacks" do
       @cover.call!(name: "Rubyist in a nutshell")
       assert_equal @cover.logs, [:before_call, :before_task, :callable, :after_task, :after_call]
