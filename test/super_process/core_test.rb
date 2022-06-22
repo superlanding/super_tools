@@ -87,5 +87,11 @@ class SuperProcessCoreTest < MiniTest::Spec
       assert_equal @cover.logs, [:before_call, :before_task, :callable, :after_task, :after_call]
     end
 
+    should "able to call without any exceptions" do
+      assert_equal @cover.call, false
+      @cover.call(name: "Legal Book Name !")
+      assert @cover.call
+    end
+
   end
 end
