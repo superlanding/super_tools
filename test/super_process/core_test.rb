@@ -9,10 +9,13 @@ class SuperProcessCoreTest < MiniTest::Spec
   end
 
   describe "init" do
-    should "set model_name to attr_accessor" do
+    should "set model_name to attr_accessor and run block" do
       cover = BookCover.new Book.new(name: "Shitcode in a nutshell")
       assert cover.respond_to? :book
       assert cover.respond_to? :book=
+
+      assert cover.respond_to? :heading
+      assert cover.respond_to? :heading=
     end
   end
 end
