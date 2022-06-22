@@ -18,6 +18,7 @@ class SuperProcessCoreTest < MiniTest::Spec
 
     callable do
       logs.push :callable
+      "This is the result"
     end
 
     def before_call
@@ -92,6 +93,20 @@ class SuperProcessCoreTest < MiniTest::Spec
       @cover.call(name: "Legal Book Name !")
       assert @cover.call
     end
-
   end
+
+  describe "result" do
+
+    should "return nil result" do
+      # 書名不正確，所以不會呼叫 callback block
+      @cover.call
+      assert_nil @cover.result
+    end
+
+    should "return result" do
+      @cover.call(name: "Happy Coder")
+      assert @cover.result, "This is the result"
+    end
+  end
+
 end
