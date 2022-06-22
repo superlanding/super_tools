@@ -42,6 +42,7 @@ module SuperProcess
       class_eval(&block) if block_given?
 
       define_method :initialize do |model|
+        super nil
         self.send("#{model_name}=", model)
       end
     end

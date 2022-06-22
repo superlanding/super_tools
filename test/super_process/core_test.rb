@@ -7,7 +7,7 @@ class SuperProcessCoreTest < MiniTest::Spec
       attribute :heading, String
     end
     attribute :subheading, String
-    attribute :logs, Array
+    attribute :logs, Array, default: []
 
     validate :validate_book_name
 
@@ -49,9 +49,7 @@ class SuperProcessCoreTest < MiniTest::Spec
 
   before do
     @book = Book.new(name: "Shitcode in a nutshell")
-    @cover = BookCover.new(@book).tap do |cover|
-      cover.logs = []
-    end
+    @cover = BookCover.new(@book)
   end
 
   describe "init" do
