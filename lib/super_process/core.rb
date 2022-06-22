@@ -1,4 +1,5 @@
 require 'virtus'
+
 module SuperProcess
   class Core
     include ActiveModel::Validations
