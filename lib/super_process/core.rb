@@ -8,6 +8,13 @@ module SuperProcess
 
     ValidError = Class.new(StandardError)
 
+    # https://github.com/rails/rails/blob/v6.1.6/activesupport/lib/active_support/callbacks.rb#L97
+    # 這裡透過 define_callbacks define 了 :validations 與 :task
+    # 卻沒有 set_callbacks，所以在 run_callbacks 時
+    # 會因為找不到儲存的 callback 而直接執行 block
+    # 這裡的解法必須注意 rails 內部或是使用此 class 的開發者
+    # 不可以使用 :validations 與 :task 命名的 callback
+    # 否則會有不可預期的副作用
     define_callbacks :validations, :task
 
     def self.before_call(method_name)
