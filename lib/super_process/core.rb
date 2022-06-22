@@ -73,6 +73,8 @@ module SuperProcess
       @result
     end
 
+    # 這裡可能需要討論一下是否要更名
+    # error_messages ( 複數 )，但 return 出去的是單數 string
     def error_messages
       if errors.messages.values.present?
         errors.messages.values.first.first
