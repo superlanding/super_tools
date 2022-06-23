@@ -1,4 +1,5 @@
 require "super_table/view_helpers"
+
 module SuperTable
   class Builder
     include ViewHelpers
