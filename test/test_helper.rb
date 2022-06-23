@@ -22,6 +22,9 @@ require "active_record"
 class Book < ActiveRecord::Base
 end
 
+class FakeBook < ActiveRecord::Base
+end
+
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 ActiveRecord::Schema.verbose = false
 
