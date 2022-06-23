@@ -1,3 +1,4 @@
+# NOTE: 這個 class 完全沒有在 landing 或 xdelivery 用到
 module SuperLogger
   class Formatter < ::Logger::Formatter
     include ActiveSupport::TaggedLogging::Formatter
