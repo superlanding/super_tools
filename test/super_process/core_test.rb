@@ -47,6 +47,11 @@ class SuperProcessCoreTest < MiniTest::Spec
     end
   end
 
+  class BookGoldenCover < SuperProcess::Core
+    init :book
+    attribute :name, String, default: "Default Name"
+  end
+
   before do
     @book = Book.new(name: "Shitcode in a nutshell")
     @cover = BookCover.new(@book)
@@ -117,6 +122,20 @@ class SuperProcessCoreTest < MiniTest::Spec
     should "not have error message" do
       @cover.call(name: "死了都要 code，不淋漓盡致不痛快")
       assert_equal @cover.error_messages, ""
+    end
+  end
+
+  describe "constructor for init method" do
+
+    should "have default value" do
+      # FakeBook 沒有 name 這個 attribute
+      cover = BookGoldenCover.new FakeBook.new
+      assert_equal cover.name, "Default Name"
+    end
+
+    should "override default value" do
+      cover = BookGoldenCover.new Book.new(name: "有書名")
+      assert_equal cover.name, "有書名"
     end
   end
 
