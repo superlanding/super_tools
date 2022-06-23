@@ -137,6 +137,12 @@ class SuperProcessCoreTest < MiniTest::Spec
       cover = BookGoldenCover.new Book.new(name: "有書名")
       assert_equal cover.name, "有書名"
     end
+
+    should "override default value with hash" do
+      cover = BookGoldenCover.new(name: "有書名")
+      assert_equal cover.name, "有書名"
+    end
+
   end
 
 end
