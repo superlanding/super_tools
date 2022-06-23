@@ -1,3 +1,4 @@
+# NOTE: 這個 class 完全沒有在 landing 或 xdelivery 出現過
 require "searchkick"
 
 module SuperSearch
