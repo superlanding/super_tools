@@ -47,6 +47,11 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
       assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
     end
 
+    should "parse utf8.xlsx" do
+      spreadsheet = parse "utf8.xlsx"
+      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+    end
+
   end
 
 end
