@@ -42,6 +42,11 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
       assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
     end
 
+    should "parse big5-hkscs csv" do
+      spreadsheet = parse "big5-hkscs.csv"
+      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+    end
+
   end
 
 end
