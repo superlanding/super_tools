@@ -17,6 +17,12 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
       assert spreadsheet.errors.first.full_message, "File 檔案格式錯誤"
     end
 
+    should "handle empty csv file" do
+      spreadsheet = SuperSpreadsheet::Loader.new "test/support/spreadsheet/empty.csv"
+      spreadsheet.call
+      assert spreadsheet.errors.first.full_message, "檔案內容錯誤，空白檔案"
+    end
+
   end
 
 end
