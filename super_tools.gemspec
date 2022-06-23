@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "roo-xls", "1.2.0"
   spec.add_dependency "spreadsheet"
   spec.add_dependency "virtus", "~> 1.0.5"
-  spec.add_dependency "reform-rails"
+  spec.add_dependency "reform-rails", "~> 0.2.3"
   spec.add_dependency "reform", "2.6.2"
   spec.add_dependency "dry-types", "1.5.1"
   spec.add_dependency "dry-logic", "1.2.0"
