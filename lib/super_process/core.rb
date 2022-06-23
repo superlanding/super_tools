@@ -74,7 +74,7 @@ module SuperProcess
       @result
     end
 
-    # 這裡可能需要討論一下是否要更名
+    # NOTE: 這裡可能需要討論一下是否要更名
     # error_messages ( 複數 )，但 return 出去的是單數 string
     def error_messages
       if errors.messages.values.present?
@@ -84,7 +84,7 @@ module SuperProcess
       end
     end
 
-    # 要確認這裡的意圖
+    # NOTE: 要確認這裡的意圖
     # 如果是有透過 init 設定 model 的 class
     # 底下的 new 會出錯
     def self.method_missing(m, *args, &block)
