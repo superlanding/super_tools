@@ -71,11 +71,11 @@ module SuperSpreadsheet
     private
 
     def csv_content_big5!
-      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5, invalid: :replace, undef: :replace, replace: "")
+      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5)
     end
 
     def csv_content_big5_hkscs!
-      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5_HKSCS, invalid: :replace, undef: :replace, replace: "")
+      csv_content.encode!(Encoding::UTF_8, Encoding::BIG5_HKSCS)
     end
 
     def convert_float_to_integer(row)
