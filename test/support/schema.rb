@@ -4,4 +4,8 @@ ActiveRecord::Schema.define(version: 1) do
     t.string   "name"
   end
 
+  create_table "fake_books" do |t|
+    t.integer "page", default: 0, null: false
+  end
+
 end
