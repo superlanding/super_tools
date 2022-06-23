@@ -125,6 +125,7 @@ class SuperProcessCoreTest < MiniTest::Spec
     end
   end
 
+  # LINE 討論後決定 init 後的類別不可以複寫 virtus 的 attributes
   describe "constructor for init method" do
 
     should "have default value" do
@@ -135,12 +136,12 @@ class SuperProcessCoreTest < MiniTest::Spec
 
     should "override default value" do
       cover = BookGoldenCover.new Book.new(name: "有書名")
-      assert_equal cover.name, "有書名"
+      assert_equal cover.name, "Default Name"
     end
 
     should "override default value with hash" do
       cover = BookGoldenCover.new(name: "有書名")
-      assert_equal cover.name, "有書名"
+      assert_equal cover.name, "Default Name"
     end
 
   end
