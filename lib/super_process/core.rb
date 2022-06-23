@@ -42,7 +42,7 @@ module SuperProcess
       class_eval(&block) if block_given?
 
       define_method :initialize do |model|
-        super nil
+        super model.attributes.transform_keys(&:to_sym).slice(*attributes.keys)
         self.send("#{model_name}=", model)
       end
     end
