@@ -148,6 +148,7 @@ module SuperZipcode
       CITY_ZONE_ZIP_CODES[city][district]
     end
 
+    # NOTE: 輸入 台北市東沙群島 可以找到台北市是否合理?
     def self.find_city(address)
       regex_match = code_regex =~ address
       return nil if regex_match.blank?
