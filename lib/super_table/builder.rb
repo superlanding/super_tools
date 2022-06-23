@@ -1,4 +1,4 @@
-require 'super_table/view_helpers'
+require "super_table/view_helpers"
 module SuperTable
   class Builder
     include ViewHelpers
@@ -16,7 +16,7 @@ module SuperTable
     def heads(*args, &block)
       options = args.extract_options!
 
-      classes = ['table-secondary']
+      classes = ["table-secondary"]
       classes << options[:class] if options[:class]
       options[:class] = classes.join(" ")
 
@@ -54,7 +54,7 @@ module SuperTable
 
       th(column_options) do
         concat(title)
-        concat content_tag(:div, desc, class: 'small text-primary') if desc
+        concat content_tag(:div, desc, class: "small text-primary") if desc
       end
     end
 
@@ -99,7 +99,7 @@ module SuperTable
     def placeholder_row
       tr do
         content = table.placeholder || "尚無資料"
-        td(content, colspan: table.columns.length, class: 'text-center')
+        td(content, colspan: table.columns.length, class: "text-center")
       end
     end
 
