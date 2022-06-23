@@ -27,29 +27,13 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
       assert spreadsheet.errors.first.full_message, "檔案內容錯誤，空白檔案"
     end
 
-    should "parse utf8.csv" do
-      spreadsheet = parse "utf8.csv"
-      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
-    end
+    files = ["utf8.csv", "utf8-bom.csv", "big5.csv", "big5-hkscs.csv", "utf8.xlsx", "utf8.xls"]
 
-    should "parse utf8-bom.csv" do
-      spreadsheet = parse "utf8-bom.csv"
-      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
-    end
-
-    should "parse big5.csv" do
-      spreadsheet = parse "big5.csv"
-      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
-    end
-
-    should "parse big5-hkscs.csv" do
-      spreadsheet = parse "big5-hkscs.csv"
-      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
-    end
-
-    should "parse utf8.xlsx" do
-      spreadsheet = parse "utf8.xlsx"
-      assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+    files.each do |file|
+      should "parse #{file}" do
+        spreadsheet = parse file
+        assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+      end
     end
 
   end
