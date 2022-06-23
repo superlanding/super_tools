@@ -1,12 +1,12 @@
-require 'searchkick'
+require "searchkick"
 
 module SuperSearch
   class Scroll
     attr_accessor :expire_time, :size, :query
 
-    # ScrollSearch.new(Member, '*', where: {}, order: {}, scroll: '5m', size: 10000)
-    def initialize(model, term: '*', options: {})
-      self.expire_time = options.delete(:scroll) || '5m'
+    # ScrollSearch.new(Member, "*", where: {}, order: {}, scroll: "5m", size: 10000)
+    def initialize(model, term: "*", options: {})
+      self.expire_time = options.delete(:scroll) || "5m"
 
       # 單次筆數不得超過 10000
       self.size = options.delete(:size).to_i
@@ -49,7 +49,7 @@ module SuperSearch
         # searchkick/query line: 104
         def handle_response(response)
           # 從 response 設定 scroll ID
-          @scroll_id = response['_scroll_id']
+          @scroll_id = response["_scroll_id"]
           super
         end
 
@@ -67,7 +67,7 @@ module SuperSearch
 
     # 開始遍歷搜尋
     def search(&block)
-      while r = query.execute and not r.response['hits']['hits'].empty? do
+      while r = query.execute and not r.response["hits"]["hits"].empty? do
         block.call(r.results, r.total_count) if block
       end
     end
