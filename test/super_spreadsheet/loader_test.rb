@@ -27,12 +27,24 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
       assert spreadsheet.errors.first.full_message, "檔案內容錯誤，空白檔案"
     end
 
-    files = ["utf8.csv", "utf8-bom.csv", "big5.csv", "big5-hkscs.csv", "utf8.xlsx", "utf8.xls"]
-
-    files.each do |file|
+    ["utf8.csv", "big5.csv", "big5-hkscs.csv"].each do |file|
       should "parse #{file}" do
         spreadsheet = parse file
-        assert spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+        assert_equal spreadsheet.rows, [["姓名", "電話"], ["許功蓋", "0912-333-456"]]
+      end
+    end
+
+    should "parse utf8-bom.csv" do
+      spreadsheet = parse "utf8-bom.csv"
+      # csv parser 會保留 BOM 在第一個 row
+      assert_equal spreadsheet.rows, [["\uFEFF姓名", "電話"], ["許功蓋", "0912-333-456"]]
+    end
+
+    ["utf8.xlsx", "utf8.xls"].each do |file|
+      # excel 檔案會自動將 float 轉 integer
+      should "parse #{file}" do
+        spreadsheet = parse file
+        assert_equal spreadsheet.rows, [["姓名", "電話", "pi"], ["許功蓋", "0912-333-456", 3]]
       end
     end
 
