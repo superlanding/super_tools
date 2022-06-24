@@ -82,15 +82,5 @@ module SuperProcess
       errors.messages.values.flatten
     end
 
-    # NOTE: 要確認這裡的意圖
-    # 如果是有透過 init 設定 model 的 class
-    # 底下的 new 會出錯
-    def self.method_missing(m, *args, &block)
-      if block_given?
-        new.public_send(m, *args, &block)
-      else
-        new.public_send(m, *args)
-      end
-    end
   end
 end
