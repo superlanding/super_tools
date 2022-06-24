@@ -75,11 +75,7 @@ module SuperProcess
     end
 
     def error_message
-      if errors.messages.values.present?
-        errors.messages.values.first.first
-      else
-        ""
-      end
+      errors.messages.values.first.first if errors.messages.values.present?
     end
 
     def error_messages

@@ -133,7 +133,7 @@ class SuperProcessCoreTest < MiniTest::Spec
 
     should "not have error message" do
       @cover.call(name: "死了都要 code，不淋漓盡致不痛快")
-      assert_equal @cover.error_message, ""
+      assert_nil @cover.error_message
     end
   end
 
