@@ -82,6 +82,10 @@ module SuperProcess
       end
     end
 
+    def error_messages
+      errors.messages.values.flatten
+    end
+
     # NOTE: 要確認這裡的意圖
     # 如果是有透過 init 設定 model 的 class
     # 底下的 new 會出錯

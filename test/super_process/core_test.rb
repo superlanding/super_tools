@@ -52,6 +52,18 @@ class SuperProcessCoreTest < MiniTest::Spec
     attribute :name, String, default: "Default Name"
   end
 
+  class Bookshelf < SuperProcess::Core
+    init :book
+    attribute :name, String
+    attribute :price, Integer
+
+    validates :name, presence: true
+    validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+    callable do
+    end
+  end
+
   before do
     @book = Book.new(name: "Shitcode in a nutshell")
     @cover = BookCover.new(@book)
@@ -122,6 +134,24 @@ class SuperProcessCoreTest < MiniTest::Spec
     should "not have error message" do
       @cover.call(name: "死了都要 code，不淋漓盡致不痛快")
       assert_equal @cover.error_message, ""
+    end
+  end
+
+
+  describe "error_messages" do
+
+    should "have multiple error messages" do
+      I18n.locale = :en
+      bookshelf = Bookshelf.new({})
+      bookshelf.valid?
+      assert_equal bookshelf.error_messages, ["can't be blank", "can't be blank", "is not a number"]
+    end
+
+    should "not have any error messages" do
+      bookshelf = Bookshelf.new(name: "name", price: 10)
+      # 這裡要再設定
+      bookshelf.call(name: "Go4", price: 10)
+      assert_equal bookshelf.error_messages, []
     end
   end
 
