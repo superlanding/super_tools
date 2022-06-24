@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "warning"
   spec.add_development_dependency "sqlite3", "1.4.4"
 
-  spec.add_dependency "rails", "6.1.6"
+  spec.add_dependency "rails", "> 6", "< 7"
   spec.add_dependency "nokogiri", ">= 1.6"
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"
