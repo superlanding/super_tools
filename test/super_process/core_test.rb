@@ -3,9 +3,9 @@ require "test_helper"
 class SuperProcessCoreTest < MiniTest::Spec
 
   class BookCover < SuperProcess::Core
-    init :book do
-      attribute :heading, String
-    end
+    init :book
+
+    attribute :heading, String
     attribute :subheading, String
     attribute :logs, Array, default: []
 

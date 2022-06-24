@@ -36,11 +36,8 @@ module SuperProcess
       set_callback CALLBACK_TASK, :after, method_name
     end
 
-    def self.init(model_name, &block)
+    def self.init(model_name)
       attr_accessor model_name
-
-      class_eval(&block) if block_given?
-
       define_method :initialize do |model|
         super({})
         self.send("#{model_name}=", model)
