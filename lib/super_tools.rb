@@ -9,6 +9,7 @@ require "super_tools/version"
 
 # TASKS
 require "super_process/core"
+require "super_process/basic"
 
 # FORMS
 require "super_spreadsheet/loader"
