@@ -9,9 +9,7 @@ module SuperFormatter
 
       callable do
         build_rows!(Head, Row)
-
         self.orders = merged_orders!.values
-
         self.orders
       end
 
