@@ -19,12 +19,12 @@ class SuperSpreadsheetLoaderTest < MiniTest::Spec
 
     should "handle invalid file extension" do
       spreadsheet = parse "file.lol"
-      assert spreadsheet.errors.first.full_message, "File 檔案格式錯誤"
+      assert spreadsheet.errors[:file], "File 檔案格式錯誤"
     end
 
     should "handle empty csv file" do
       spreadsheet = parse "empty.csv"
-      assert spreadsheet.errors.first.full_message, "檔案內容錯誤，空白檔案"
+      assert spreadsheet.errors[:file], "檔案內容錯誤，空白檔案"
     end
 
     ["utf8.csv", "big5.csv", "big5-hkscs.csv"].each do |file|
