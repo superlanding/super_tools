@@ -1,16 +1,30 @@
 require "test_helper"
 require "action_controller"
+require 'disposable/twin/parent'
 
 class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
+    feature Disposable::Twin::Parent
     form_name :sample_form
     property :name
     validates :name, presence: true
 
+    collection :tags, virtual: true, default: [], populator: :populate_tags! do
+      property :name
+    end
+
     def save(params = {})
       save_with_transaction(params) do
+        tags_content = tags.map(&:name).join(", ")
+        model.assign_attributes(content: "This is a book: #{name}, tags: #{tags_content}", status: "selling")
       end
+    end
+
+    protected
+
+    def populate_tags!(fragment:, **)
+      tags.append(OpenStruct.new(name: fragment[:data]))
     end
   end
 
@@ -111,9 +125,12 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       assert_equal Book.first.name, "三民主義"
 
       # 編輯
-      form.save(name: "吾黨所宗")
+      form.save(name: "吾黨所宗", tags: [ { name: "tag1" }, { name: "tag2" } ])
       assert_equal Book.all.size, 1
       assert_equal Book.first.name, "吾黨所宗"
+
+      assert_equal Book.first.status, "selling"
+      assert_equal Book.first.content, "This is a book: 吾黨所宗, tags: tag1, tag2"
     end
 
     should "be able to validate" do
@@ -131,7 +148,7 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       form = MethodNameCallbackForm.new Book.new(name: "o_o")
       form.save_with_transaction
       expected = [ :before_transaction, :before_queries, :before_validations,
-        :after_validations, :before_commit, :after_commit ]
+                   :after_validations, :before_commit, :after_commit ]
       assert_equal form.called, expected
     end
 
