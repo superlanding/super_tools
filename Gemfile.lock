@@ -9,7 +9,7 @@ PATH
       nokogiri (>= 1.6)
       rails (> 6, < 7)
       reform (= 2.6.2)
-      reform-rails (~> 0.2.3)
+      reform-rails (= 0.2.3)
       roo
       roo-xls (= 1.2.0)
       searchkick
