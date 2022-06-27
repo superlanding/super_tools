@@ -20,7 +20,6 @@ describe "SuperTable::BaseTest" do
     @value = Value.new(@order)
   end
 
-
   should "#id = 1" do
     assert_equal 1, @value.id
   end
