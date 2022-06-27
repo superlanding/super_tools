@@ -1,6 +1,7 @@
-require 'super_formatter/import'
-require 'super_formatter/hct/head'
-require 'super_formatter/hct/row'
+require "super_formatter/import"
+require "super_formatter/hct/head"
+require "super_formatter/hct/row"
+
 module SuperFormatter
   module Ecan
     class Import < SuperFormatter::Import
