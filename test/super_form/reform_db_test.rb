@@ -6,19 +6,28 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
     feature Disposable::Twin::Parent
+
     form_name :sample_form
     property :name
     validates :name, presence: true
 
     collection :tags, virtual: true, default: [], populator: :populate_tags! do
       property :name
+      validates :name, presence: true
     end
 
     def save(params = {})
       save_with_transaction(params) do
-        tags_content = tags.map(&:name).join(", ")
-        model.assign_attributes(content: "This is a book: #{name}, tags: #{tags_content}", status: "selling")
+        model.assign_attributes(content: content!, status: "selling")
       end
+    end
+
+    def tags_content!
+      tags.map(&:name).join(", ")
+    end
+
+    def content!
+      "This is a book: #{name}, tags: #{tags_content!}"
     end
 
     protected
@@ -95,12 +104,16 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
     should "be able to use default i18n prefix" do
       form = SampleForm.new Book.new
-      form.save
+      assert_equal false, form.save(tags: [ { name: "" } ])
       assert_equal form.errors[:name].first, "can't be blank"
+
+      # 還原出問題了，只要有 collection + 存取 full_messages 
+      # 就會有 SystemStackError: stack level too deep 錯誤
+      puts form.errors.full_messages.inspect
 
       # 切換語言後要重新呼叫 save_with_transaction 才會更新錯誤訊息的語言
       I18n.locale = :"zh-TW"
-      form.save
+      assert_equal false, form.save
       assert_equal form.errors[:name].first, "書名不可以空白"
     end
 
@@ -120,12 +133,12 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
       # 新增
       form = SampleForm.new Book.new(name: "三民主義")
-      form.save
+      assert_equal true, form.save
       assert_equal Book.all.size, 1
       assert_equal Book.first.name, "三民主義"
 
       # 編輯
-      form.save(name: "吾黨所宗", tags: [ { name: "tag1" }, { name: "tag2" } ])
+      assert_equal true, form.save(name: "吾黨所宗", tags: [ { name: "tag1" }, { name: "tag2" } ])
       assert_equal Book.all.size, 1
       assert_equal Book.first.name, "吾黨所宗"
 
