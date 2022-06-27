@@ -1,7 +1,8 @@
-require 'super_formatter/import'
-require 'super_formatter/shopline/head'
-require 'super_formatter/shopline/row'
-require 'super_formatter/shopline/order'
+require "super_formatter/import"
+require "super_formatter/shopline/head"
+require "super_formatter/shopline/row"
+require "super_formatter/shopline/order"
+
 module SuperFormatter
   module Shopline
     class Import < ::SuperFormatter::Import
