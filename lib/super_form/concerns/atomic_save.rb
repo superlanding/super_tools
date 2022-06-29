@@ -60,6 +60,9 @@ module SuperForm
             # 1. do validate data
             run_callbacks :validations do
               if validate(params) == false
+                # FIXME:
+                # 還原出問題了，只要有 collection + 存取 full_messages
+                # 就會有 SystemStackError: stack level too deep 錯誤
                 raise ReformAtomicSaveError, "Not Validate => #{self.errors.full_messages.inspect}"
               end
             end
@@ -67,10 +70,10 @@ module SuperForm
             # 2. sync to model
             sync
 
-            # 2. define how to store data in block
+            # 3. define how to store data in block
             yield if block_given?
 
-            # 3. save all data
+            # 4. save all data
             save!
           end
         end

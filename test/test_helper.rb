@@ -38,6 +38,8 @@ require "rails/test_help"
 require "minitest/autorun"
 require "shoulda-context"
 require "helpers/build_orders_helper"
+
+require "reform"
 require "reform/rails"
 require "super_tools"
 
