@@ -1,5 +1,6 @@
 require "super_form/concerns/atomic_save"
 require "reform"
+require "reform/rails"
 require "reform/form"
 require "reform/active_record"
 require "reform/form/coercion"
