@@ -5,7 +5,6 @@ require 'disposable/twin/parent'
 class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
-    feature Disposable::Twin::Parent
 
     form_name :sample_form
     property :name
