@@ -107,7 +107,7 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       assert_equal false, form.save(tags: [ { name: "" } ])
       assert_equal form.errors[:name].first, "can't be blank"
 
-      # 還原出問題了，只要有 collection + 存取 full_messages 
+      # 還原出問題了，只要有 collection + 存取 full_messages
       # 就會有 SystemStackError: stack level too deep 錯誤
       puts form.errors.full_messages.inspect
 
