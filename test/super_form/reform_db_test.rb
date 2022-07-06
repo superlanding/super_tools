@@ -150,6 +150,8 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
       assert_equal Book.first.status, "selling"
       assert_equal Book.first.content, "This is a book: 吾黨所宗, tags: tag1, tag2"
+      # 必須存進去 DB
+      assert form.model.persisted?
     end
 
     should "be able to validate" do
