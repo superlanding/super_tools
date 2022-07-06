@@ -32,7 +32,9 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     protected
 
     def populate_tags!(fragment:, **)
-      tags.append(OpenStruct.new(name: fragment[:data]))
+      existed_tag = tags.find { |tag| tag.name == fragment[:name] }
+      return existed_tag if existed_tag
+      tags.append(OpenStruct.new(name: fragment[:name]))
     end
   end
 
