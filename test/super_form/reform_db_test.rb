@@ -5,7 +5,6 @@ require 'disposable/twin/parent'
 class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
-    feature Disposable::Twin::Parent
 
     form_name :sample_form
     property :name
@@ -18,10 +17,14 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       validate :valid_tags_name_not_equal_simple_form_name
 
       def valid_tags_name_not_equal_simple_form_name
-        if name == parent.name
+        if name == SampleForm.parent.model_name.to_s
           errors.add(:name, "tag name 不能跟表單的 name 一樣")
         end
       end
+    end
+
+    def self.parent
+      self
     end
 
     def save(params = {})
