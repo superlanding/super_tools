@@ -134,6 +134,13 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       form.save
       assert_equal form.errors[:name].first, "書名不可以空白，請填寫書名"
     end
+
+    should "nested error" do
+      I18n.locale = :"zh-TW"
+      form = SampleForm.new Book.new(name: "我是書名")
+      form.save(tags: [ { name: "我是書名" } ])
+      assert_equal form.errors.full_messages, ["Name tag name 不能跟表單的 name 一樣"]
+    end
   end
 
   context "Saving" do
