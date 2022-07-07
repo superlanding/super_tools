@@ -6,6 +6,8 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
 
+    feature Disposable::Twin::Parent
+
     form_name :sample_form
     property :name
     validates :name, presence: true
@@ -17,7 +19,7 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       validate :valid_tags_name_not_equal_simple_form_name
 
       def valid_tags_name_not_equal_simple_form_name
-        if name == SampleForm.parent.model_name.to_s
+        if name == parent.name
           errors.add(:name, "tag name 不能跟表單的 name 一樣")
         end
       end
