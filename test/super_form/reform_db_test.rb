@@ -6,6 +6,8 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
 
+    feature Disposable::Twin::Parent
+
     form_name :sample_form
     property :name
     validates :name, presence: true
@@ -17,7 +19,7 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       validate :valid_tags_name_not_equal_simple_form_name
 
       def valid_tags_name_not_equal_simple_form_name
-        if name == SampleForm.parent.model_name.to_s
+        if name == parent.name
           errors.add(:name, "tag name 不能跟表單的 name 一樣")
         end
       end
@@ -131,6 +133,13 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       form = AnotherForm.new Book.new
       form.save
       assert_equal form.errors[:name].first, "書名不可以空白，請填寫書名"
+    end
+
+    should "nested error" do
+      I18n.locale = :"zh-TW"
+      form = SampleForm.new Book.new(name: "我是書名")
+      form.save(tags: [ { name: "我是書名" } ])
+      assert_equal form.errors.full_messages, ["Name tag name 不能跟表單的 name 一樣"]
     end
   end
 
