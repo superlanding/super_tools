@@ -5,6 +5,7 @@ require 'disposable/twin/parent'
 class SuperFormReformDbTest < ActiveSupport::TestCase
 
   class SampleForm < SuperForm::Reform
+
     feature Disposable::Twin::Parent
 
     form_name :sample_form
@@ -14,6 +15,18 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     collection :tags, virtual: true, default: [], populator: :populate_tags! do
       property :name
       validates :name, presence: true
+
+      validate :valid_tags_name_not_equal_simple_form_name
+
+      def valid_tags_name_not_equal_simple_form_name
+        if name == parent.name
+          errors.add(:name, "tag name 不能跟表單的 name 一樣")
+        end
+      end
+    end
+
+    def self.parent
+      self
     end
 
     def save(params = {})
@@ -33,7 +46,9 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
     protected
 
     def populate_tags!(fragment:, **)
-      tags.append(OpenStruct.new(name: fragment[:data]))
+      existed_tag = tags.find { |tag| tag.name == fragment[:name] }
+      return existed_tag if existed_tag
+      tags.append(OpenStruct.new(name: fragment[:name]))
     end
   end
 
@@ -107,10 +122,6 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       assert_equal false, form.save(tags: [ { name: "" } ])
       assert_equal form.errors[:name].first, "can't be blank"
 
-      # 還原出問題了，只要有 collection + 存取 full_messages 
-      # 就會有 SystemStackError: stack level too deep 錯誤
-      puts form.errors.full_messages.inspect
-
       # 切換語言後要重新呼叫 save_with_transaction 才會更新錯誤訊息的語言
       I18n.locale = :"zh-TW"
       assert_equal false, form.save
@@ -122,6 +133,13 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
       form = AnotherForm.new Book.new
       form.save
       assert_equal form.errors[:name].first, "書名不可以空白，請填寫書名"
+    end
+
+    should "nested error" do
+      I18n.locale = :"zh-TW"
+      form = SampleForm.new Book.new(name: "我是書名")
+      form.save(tags: [ { name: "我是書名" } ])
+      assert_equal form.errors.full_messages, ["Name tag name 不能跟表單的 name 一樣"]
     end
   end
 
@@ -144,6 +162,8 @@ class SuperFormReformDbTest < ActiveSupport::TestCase
 
       assert_equal Book.first.status, "selling"
       assert_equal Book.first.content, "This is a book: 吾黨所宗, tags: tag1, tag2"
+      # 必須存進去 DB
+      assert form.model.persisted?
     end
 
     should "be able to validate" do

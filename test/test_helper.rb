@@ -39,8 +39,6 @@ require "minitest/autorun"
 require "shoulda-context"
 require "helpers/build_orders_helper"
 
-require "reform"
-require "reform/rails"
 require "super_tools"
 
 Reform::Rails::Railtie.active_model!
