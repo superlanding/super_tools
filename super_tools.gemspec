@@ -48,6 +48,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-types", '~> 0.13.2'
   spec.add_dependency 'dry-logic', '~> 0.4.2'
   spec.add_dependency 'forwardable'
-  spec.add_dependency 'warehouse_items', '~> 0.3.0'
+  spec.add_dependency 'warehouse_items', '~> 1.0.0'
   spec.add_dependency 'searchkick'
 end
