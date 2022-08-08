@@ -1,4 +1,5 @@
 module BuildOrdersHelper
+
   def build_orders
     [
       OpenStruct.new(ship_no: "000108", recipient: "陳漢強"),

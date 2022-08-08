@@ -26,20 +26,24 @@ end
 
 describe "SuperTable::ViewHelpersTest" do
   include BuildOrdersHelper
-  
+
   def render(template)
-    @view ||= ActionView::Base.new
-    @view.render(inline: template, locals: { table: @table }).gsub("\n", "")
+    @renderer.render(@context, inline: template, locals: { table: @table })
+      .gsub("\n", "")
   end
-  
+
   before do
     @orders = build_orders
     @table = SuperTableTest.new(@orders)
+
+    # https://stackoverflow.com/questions/70011135/render-js-erb-view-on-rails-6
+    lookup_context = ActionView::LookupContext.new([])
+    @context = ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
+    @renderer = ActionView::Renderer.new(lookup_context)
   end
 
   should 'view_helper 應該要有 #super_table' do
-    helper = ActionView::Base.new
-    assert(helper.respond_to?(:super_table))
+    assert(@context.respond_to?(:super_table))
   end
 
   describe "#super_table" do

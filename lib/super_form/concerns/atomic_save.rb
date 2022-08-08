@@ -60,17 +60,17 @@ module SuperForm
             # 1. do validate data
             run_callbacks :validations do
               if validate(params) == false
-                raise ReformAtomicSaveError, "Not Validate => #{self.errors.full_messages.inspect}"
+                raise ReformAtomicSaveError, "Not Validate => #{self.errors.full_messages}"
               end
             end
 
             # 2. sync to model
             sync
 
-            # 2. define how to store data in block
+            # 3. define how to store data in block
             yield if block_given?
 
-            # 3. save all data
+            # 4. save all data
             save!
           end
         end

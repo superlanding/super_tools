@@ -1,4 +1,5 @@
-require 'virtus'
+require "virtus"
+
 module SuperForm
   class Basic
     include ActiveModel::Model
@@ -6,12 +7,6 @@ module SuperForm
     include ActiveModel::Conversion
     include ActiveModel::Validations
     include Virtus.model
-
-    def sync_params(params)
-      params.each do |attr, value|
-        public_send("#{attr}=", value) if respond_to?("#{attr}=")
-      end
-    end
 
     class << self
       def form_name(name)

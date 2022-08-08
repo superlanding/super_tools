@@ -1,0 +1,7 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    target-branch: "feat-rails-6.1.6"
+    schedule:
+      interval: "daily"

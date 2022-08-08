@@ -65,7 +65,7 @@ module SuperInteraction
     end
 
     def b_alert(class_type, text)
-      cmd("if (typeof($.alert) == undefined) { alert('#{helpers.j(text)}'); } else { $.alert.#{class_type}('#{helpers.j(text)}'); }")
+      cmd("if (typeof($.alert) === 'undefined') { alert('#{helpers.j(text)}'); } else { $.alert.#{class_type}('#{helpers.j(text)}'); }")
     end
 
     def cmd(js_code)

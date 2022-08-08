@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 
 module SuperTable
   class Record < Struct.new(:model)

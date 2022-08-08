@@ -1,4 +1,5 @@
-require 'warehouse'
+require "warehouse"
+
 module SuperFormatter
   module Shopline
     class Order
@@ -13,7 +14,7 @@ module SuperFormatter
       delegate :complete?, to: :row
 
       def order_id
-        row.order_id.gsub("#", '')
+        row.order_id.gsub("#", "")
       end
 
       def initialize(row)
@@ -23,13 +24,13 @@ module SuperFormatter
 
       def provider
         @provider ||= case
-        when row.shipping_method.include?('7-11')
+        when row.shipping_method.include?("7-11")
           :UNIMART
-        when row.shipping_method.include?('全家')
+        when row.shipping_method.include?("全家")
           :FAMI
-        when row.shipping_method.include?('新竹')
+        when row.shipping_method.include?("新竹")
           :HCT
-        when row.shipping_method.include?('黑貓')
+        when row.shipping_method.include?("黑貓")
           :TCAT
         else
           nil
@@ -58,7 +59,7 @@ module SuperFormatter
       end
 
       def cash_on_delivery?
-        if row.payment_method.include?('取貨付款')
+        if row.payment_method.include?("取貨付款")
           true
         else
           false
@@ -70,7 +71,7 @@ module SuperFormatter
       end
 
       def paid?
-        row.payment_status == '已付款'
+        row.payment_status == "已付款"
       end
 
       def items

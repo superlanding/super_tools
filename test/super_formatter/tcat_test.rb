@@ -2,8 +2,8 @@ require 'test_helper'
 
 describe "SuperFormatter::Tcat" do
   before do
-    @spreadsheet = SuperSpreadsheet::Loader.new("test/support/tcat/export.csv").tap { |s| s.call }; ""
-    @service = SuperFormatter::Tcat::Import.new(@spreadsheet).tap { |s| s.call }; ""
+    @spreadsheet = SuperSpreadsheet::Loader.new("test/support/tcat/export.csv").tap { |s| s.call }
+    @service = SuperFormatter::Tcat::Import.new(@spreadsheet).tap { |s| s.call }
   end
 
   should "#result.length = 34" do

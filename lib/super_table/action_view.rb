@@ -1,4 +1,4 @@
-require 'super_table/builder'
+require "super_table/builder"
 
 module SuperTable
   module ActionView
@@ -10,15 +10,15 @@ module SuperTable
       table_responsive = options.delete(:responsive)
       table_size = options.delete(:size).to_s
 
-      classes = ['table']
+      classes = ["table"]
       classes << options[:class] if options[:class]
       classes.push("table-hover") if is_hover && table.collection.present?
-      classes.push("table-sm") if table_size == 'sm'
+      classes.push("table-sm") if table_size == "sm"
 
       options[:class] = classes.join(" ")
 
       case table_responsive.to_s
-      when 'sm', 'md', 'lg', 'xl'
+      when "sm", "md", "lg", "xl"
         content_tag(:div, class: "table-responsive-#{table_responsive}") do
           render_table(table, options, &block)
         end
