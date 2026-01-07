@@ -1,6 +1,6 @@
 require "test_helper"
 
-class SuperZipcodeTaiwanTest < MiniTest::Spec
+class SuperZipcodeTaiwanTest < Minitest::Spec
 
   describe "find_zip_code" do
 

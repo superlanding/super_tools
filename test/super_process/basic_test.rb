@@ -1,6 +1,6 @@
 require "test_helper"
 
-class SuperProcessBasicTest < MiniTest::Spec
+class SuperProcessBasicTest < Minitest::Spec
 
   class Robot
     extend SuperProcess::Basic

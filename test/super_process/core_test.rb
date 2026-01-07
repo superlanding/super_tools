@@ -1,6 +1,6 @@
 require "test_helper"
 
-class SuperProcessCoreTest < MiniTest::Spec
+class SuperProcessCoreTest < Minitest::Spec
 
   class BookCover < SuperProcess::Core
     init :book

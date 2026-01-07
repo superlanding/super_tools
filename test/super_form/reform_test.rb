@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-class SuperFormReformTest < MiniTest::Spec
+class SuperFormReformTest < Minitest::Spec
 
   class EmptyForm < SuperForm::Reform
   end

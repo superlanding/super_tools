@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Rails 開發環境常用工具 Forms/Process/Spreadsheet}
   spec.homepage      = "https://github.com/superlanding/super_tools"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 2.7.0"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -28,8 +29,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "shoulda-context"
   spec.add_development_dependency "warning"
   spec.add_development_dependency "sqlite3", "1.4.4"
+  spec.add_development_dependency "appraisal"
 
-  spec.add_dependency "rails", "> 6", "< 7"
+  spec.add_dependency "rails", ">= 6.1", "< 8"
   spec.add_dependency "nokogiri", ">= 1.6"
   spec.add_dependency "fast_excel"
   spec.add_dependency "roo"

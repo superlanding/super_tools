@@ -1,7 +1,7 @@
 require "test_helper"
 require "action_controller"
 
-class SuperSpreadsheetLoaderTest < MiniTest::Spec
+class SuperSpreadsheetLoaderTest < Minitest::Spec
 
   def parse(path)
     spreadsheet = SuperSpreadsheet::Loader.new "test/support/spreadsheet/#{path}"

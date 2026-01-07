@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "=== Testing all Ruby versions with Rails 6 & 7 ==="
+echo ""
+
+# Check if appraisal is installed
+if ! bundle exec appraisal -h > /dev/null 2>&1; then
+  echo "Error: appraisal gem not found. Please run 'bundle install' first."
+  exit 1
+fi
+
+# Test each combination
+combinations=(
+  "ruby-2.7-rails-6:Ruby 2.7.6 + Rails 6"
+  "ruby-2.7-rails-7:Ruby 2.7.6 + Rails 7"
+  "ruby-3.0-rails-6:Ruby 3.0.7 + Rails 6"
+  "ruby-3.0-rails-7:Ruby 3.0.7 + Rails 7"
+  "ruby-3.1-rails-6:Ruby 3.1.7 + Rails 6"
+  "ruby-3.1-rails-7:Ruby 3.1.7 + Rails 7"
+)
+
+for combo in "${combinations[@]}"; do
+  IFS=':' read -r appraisal_name display_name <<< "$combo"
+  echo "===================================="
+  echo "Testing: $display_name"
+  echo "===================================="
+  bundle exec appraisal $appraisal_name rake t
+  echo ""
+done
+
+echo "===================================="
+echo "All tests completed!"
+echo "===================================="
