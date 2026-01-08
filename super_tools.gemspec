@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "spreadsheet"
   spec.add_dependency "virtus", "~> 1.0.5"
   spec.add_dependency "forwardable"
-  spec.add_dependency "warehouse_items", "~> 0.3.0"
+  spec.add_dependency "warehouse_items", ">= 0.3.0"
   spec.add_dependency "searchkick"
 
   spec.add_dependency "reform", "2.6.2"
