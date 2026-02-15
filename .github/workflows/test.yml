@@ -30,6 +30,9 @@ jobs:
             gemfile: gemfiles/ruby_3.1_rails_6.gemfile
           - ruby: '3.1.7'
             gemfile: gemfiles/ruby_3.1_rails_7.gemfile
+          # Ruby 3.4.8
+          - ruby: '3.4.8'
+            gemfile: gemfiles/ruby_3.4_rails_7.1.gemfile
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:

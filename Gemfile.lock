@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    super_tools (4.0.0)
+    super_tools (4.0.1)
       dry-logic (= 1.2.0)
       dry-types (= 1.5.1)
       fast_excel
@@ -265,7 +265,7 @@ DEPENDENCIES
   rake (>= 12.2)
   reform-rails!
   shoulda-context
-  sqlite3 (= 1.4.4)
+  sqlite3
   super_tools!
   warning
 

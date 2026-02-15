@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "shoulda-context"
   spec.add_development_dependency "warning"
-  spec.add_development_dependency "sqlite3", "1.4.4"
+  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "appraisal"
 
   spec.add_dependency "rails", ">= 6.1", "< 8"
