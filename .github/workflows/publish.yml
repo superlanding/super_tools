@@ -104,6 +104,15 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
+      # setup-ruby 的 bundler-cache 會把 BUNDLE_PATH 等設定寫進已被 git 追蹤的
+      # gemfiles/.bundle/config，導致 rake release 的 guard_clean 判定工作目錄不乾淨。
+      # 這只是 CI 執行時的本機設定，不屬於發佈內容，故標記為 assume-unchanged。
+      - name: Ignore CI-only bundler config change
+        run: |
+          git status --porcelain
+          git update-index --assume-unchanged gemfiles/.bundle/config
+          git status --porcelain
+
       # 透過 rubygems/configure-rubygems-credentials 取得短效 OIDC token，
       # 再執行 bundle exec rake release（build、建立並推送 vX.Y.Z tag、push gem）
       - uses: rubygems/release-gem@7f9650160c1a4e7989fdc9855807bdbd421d8b6b # v1.4.1
