@@ -15,6 +15,7 @@
 ### Added
 
 - 新增本檔 CHANGELOG.md（依 git 歷史與 rubygems.org 版本紀錄回溯整理）。
+- CLAUDE.md 新增語言規則：README.md 與 CHANGELOG.md 一律用繁體中文（zh-TW）撰寫，程式碼、識別字與指令維持英文。
 
 ## [4.0.3] - 2026-10-23
 
